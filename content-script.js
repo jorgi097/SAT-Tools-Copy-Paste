@@ -32,8 +32,6 @@ function executeCode() {
     document.addEventListener("keydown", function (e) {
         allowCopyAndPaste(e);
     });
-
-    console.log("Copy-Paste Enabled")
 }
 
 setInterval(executeCode, 10000);
