@@ -1,37 +1,28 @@
 // Main function to execute the code
-function executeCode() {
-
+(function executeCode() {
     // Enable right-click
-    document.oncontextmenu = function () {
-        return true;
-    };
+    document.oncontextmenu = () => true;
 
-    // Enable right mouse button
-    document.addEventListener("mousedown", function (e) {
+    // Enable mouse right button
+    document.addEventListener("mousedown", (e) => {
         if (e.button === 2 || e.button === 0) {
             return true;
         }
     });
 
-    // Function to allow copy and paste
-    function allowCopyAndPaste(e) {
-        e.stopImmediatePropagation();
-        return true;
+    // Delete onpaste event listener from every input
+    function deleteOnPaste() {
+        document.querySelectorAll("[onpaste]").forEach((element) => {
+            element.removeAttribute("onpaste");
+        });
     }
+    deleteOnPaste();
 
-    //Delete onpaste event listener
-    document.querySelectorAll("[onpaste]").forEach(function (element) {
-        element.removeAttribute("onpaste");
-    });
+    // Just in case some elements are created on runtime
+    setInterval(deleteOnPaste, 10000);
 
-    // Events for copy and paste
-    document.addEventListener("copy", allowCopyAndPaste, true);
-    document.addEventListener("paste", allowCopyAndPaste, true);
-
-    // Enable Ctrl+V
-    document.addEventListener("keydown", function (e) {
-        allowCopyAndPaste(e);
-    });
-}
-
-setInterval(executeCode, 10000);
+    // Removes the reverse listener that prevents CTRL + V from executing normally
+    let script = document.createElement("script");
+    script.innerHTML = `function preventDefaultEvent(event) {  }`;
+    document.body.appendChild(script);
+})();
