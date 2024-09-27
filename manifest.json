@@ -12,5 +12,9 @@
             "run_at": "document_idle",
             "world": "MAIN"
         }
-    ]
+    ],
+    "action": {
+    "default_title": "Herramientas SAT (Copiar-Pegar)",
+    "default_popup": "popup/popup.html"
+  }
 }
