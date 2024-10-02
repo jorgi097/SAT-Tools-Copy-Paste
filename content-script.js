@@ -22,7 +22,7 @@
     setInterval(deleteOnPaste, 10000);
 
     // Removes the reverse listener that prevents CTRL + V from executing normally
-    let script = document.createElement("script");
-    script.innerHTML = `function preventDefaultEvent(event) {  }`;
-    document.body.appendChild(script);
+    let enableCtrl_V = document.createElement("script");
+    enableCtrl_V.innerHTML = `function preventDefaultEvent(event) {  }`;
+    document.body.appendChild(enableCtrl_V);
 })();
