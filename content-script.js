@@ -28,8 +28,3 @@
     // document.body.appendChild(enableCtrl_V);
 })();
 
-// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//     if (message.salute === "hello") {
-//         console.log("yes");
-//     }
-// });
