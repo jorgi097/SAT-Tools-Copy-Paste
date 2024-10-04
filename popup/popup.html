@@ -4,9 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Herramientas SAT (Copiar-Pegar)</title>
-        <link rel="stylesheet" href="normalize.css" />
-        <link rel="stylesheet" href="popup.css" />
-        <script src="popup.js"></script>
+        <link rel="stylesheet" href="/popup/normalize.css" />
+        <link rel="stylesheet" href="/popup/popup.css" />
+        <script defer src="/popup/popup.js"></script>
     </head>
     <body>
         <div class="popup-title">
@@ -20,9 +20,16 @@
             
         </div>
         <div class="popup-message">
-            <button>
-                <a href="https://portal.facturaelectronica.sat.gob.mx" target="_blank">Facture más rápido</a>
+            <button class="invoice">
+                Ir a facturar
             </button>
         </div>
+        <div class="popup-message">
+            <button id="enabledButton">
+                Loading...
+            </button>
+
+        </div>
+
     </body>
 </html>

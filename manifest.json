@@ -4,8 +4,14 @@
     "version": "1.0",
     "description": "Habilita copiar y pegar en el portal de facturación del SAT.",
     "permissions": [
-        "scripting"
+        "scripting",
+        "tabs",
+        "activeTab"
     ],
+    "background": {
+        "service_worker": "service-worker.js",
+        "type": "module"
+    },
     "content_scripts": [
         {
             "js": [
@@ -23,6 +29,9 @@
         "default_title": "Herramientas SAT (Copiar-Pegar)",
         "default_popup": "popup/popup.html"
     },
+    "host_permissions": [
+        "https://portal.facturaelectronica.sat.gob.mx/*"
+    ],
     "icons": {
         "16": "src/Logo 128px.png",
         "32": "src/Logo 48px.png",
