@@ -26,3 +26,5 @@ function executeCode() {
     enableCtrl_V.innerHTML = `function preventDefaultEvent(event) {  }`;
     document.body.appendChild(enableCtrl_V);
 }
+
+executeCode();
