@@ -5,31 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Herramientas SAT (Copiar-Pegar)</title>
         <link rel="stylesheet" href="/popup/normalize.css" />
+        <link rel="stylesheet" href="/lib/hint.css-2.7.0/hint.min.css" />
         <link rel="stylesheet" href="/popup/popup.css" />
         <script defer src="/popup/popup.js"></script>
     </head>
     <body>
-        <div class="popup-title">
-            <h2 class=>Herramientas SAT (Copiar-Pegar)</h2>
+        <div class="title-container">
+            <div class="logo-container">
+                <img src="../src/Logo 48px.png" alt="Logo">
+            </div>
+            <div class="popup-title">
+                <h2 class=>HERRAMIENTAS SAT<br/>(COPIAR-PEGAR)</h2>
+            </div>
         </div>
+        
         <div class="popup-description">
             <div class="popup-description_wraper">
-                <p>Esta extensión <b>habilita copiar y pegar</b> con el teclado en el sitio de facturación del SAT.</p>
+                <p><b>Habilita copiar y pegar</b> con el mouse y el teclado en el sitio de facturación del SAT.</p>
                 <!-- <p>Ademas habilita el menu contextual con el click derecho.</p> -->
             </div>
             
         </div>
         <div class="popup-message">
-            <button class="invoice">
+            <button id="enabledButton" class="hint--top-right hint--rounded hint--info" aria-label="Selecciona para desactiivar">
+                Loading...
+            </button>
+        </div>
+        <div class="popup-message popup-message-link">
+            <button class="invoice hint--top-right hint--rounded hint--info" aria-label="Abre la pagina del SAT">
                 Ir a facturar
             </button>
         </div>
-        <div class="popup-message">
-            <button id="enabledButton">
-                Loading...
-            </button>
 
-        </div>
+        
 
     </body>
 </html>

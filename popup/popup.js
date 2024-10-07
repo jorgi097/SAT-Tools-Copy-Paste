@@ -9,7 +9,6 @@ chrome.runtime.sendMessage({ action: "getState" }, (response) => {
     }
 });
 
-
 // Función para actualizar la interfaz
 function updateButtonState(enabled) {
     enabledState = enabled;
@@ -18,9 +17,11 @@ function updateButtonState(enabled) {
     enabledButton.classList.remove(
         enabled ? "disabledButton" : "enabledButton"
     );
+    enabledButton.setAttribute(
+        "aria-label",
+        enabled ? "Selecciona para desactiivar" : "Selecciona para activar"
+    );
 }
-
-
 
 // Habilitar y deshabilitar el script principal
 enabledButton.addEventListener("click", () => {
@@ -36,8 +37,7 @@ enabledButton.addEventListener("click", () => {
 
 // Abrir el portal de facturacion del SAT
 document
-    .querySelector(".popup-message button")
+    .querySelector(".popup-message-link")
     .addEventListener("click", function () {
         window.open("https://portal.facturaelectronica.sat.gob.mx", "_blank");
     });
-

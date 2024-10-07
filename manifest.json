@@ -13,7 +13,6 @@
         "service_worker": "service-worker.js",
         "type": "module"
     },
-
     "action": {
         "default_title": "Herramientas SAT (Copiar-Pegar)",
         "default_popup": "popup/popup.html"

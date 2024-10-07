@@ -1,5 +1,5 @@
 body {
-    min-width: 320px;
+    width: 300px;
     min-height: 400px;
     background-color: rgb(244 244 244);
     padding: 20px;
@@ -7,27 +7,36 @@ body {
 
 .popup-title {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 280px;
-    height: 2rem;
+}
+
+.title-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .popup-title > h2 {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.logo-container img {
+    width: 48px;
+    height: 100%;
+    border-radius: 100%;
 }
 
 .popup-description {
     margin-top: 1rem;
-    padding: .5rem;
-    width: 280px;
+    padding: 0.5rem;
     height: 100%;
     background-color: rgb(255 255 255);
     border-radius: 10px;
     cursor: context-menu;
 }
 
-.popup-description_wraper{
+.popup-description_wraper {
     border: rgb(212, 212, 212) 1px solid;
     border-radius: 10px;
     padding: 0 20px;
@@ -36,13 +45,12 @@ body {
 .popup-description p {
     display: block;
     margin: 1rem auto;
-    font-size: .8rem;
+    font-size: 0.9rem;
 }
 
 .popup-message {
     margin-top: 1rem;
-    padding: .5rem;
-    width: 280px;
+    padding: 0.5rem;
     min-height: 2rem;
     background-color: rgb(255 255 255);
     border-radius: 10px;
@@ -53,20 +61,21 @@ body {
     border-radius: 5px;
     border: rgb(212, 212, 212) 1px solid;
     background-color: rgb(231, 231, 231);
-    font-size: .9rem;
-    cursor: pointer; 
+    font-size: 0.9rem;
+    cursor: pointer;
+    min-width: 150px;
 }
 
-.popup-message .invoice:hover{
-    background-color: antiquewhite;
+.popup-message .invoice:hover {
+    background-color: rgb(243, 221, 193);
 }
 
-.popup-message .enabledButton{
+.popup-message .enabledButton {
     background-color: rgb(8, 136, 98);
     color: rgb(255, 255, 255);
 }
 
-.popup-message .disabledButton{
+.popup-message .disabledButton {
     background-color: rgb(192, 21, 35);
     color: rgb(255, 255, 255);
 }
