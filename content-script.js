@@ -1,6 +1,5 @@
 // Main function to execute the code
-
-(function executeCode() {
+function executeCode() {
     // Enable right-click
     document.oncontextmenu = () => true;
 
@@ -25,6 +24,5 @@
     // Removes the reverse listener that prevents CTRL + V from executing normally
     let enableCtrl_V = document.createElement("script");
     enableCtrl_V.innerHTML = `function preventDefaultEvent(event) {  }`;
-    // document.body.appendChild(enableCtrl_V);
-})();
-
+    document.body.appendChild(enableCtrl_V);
+}

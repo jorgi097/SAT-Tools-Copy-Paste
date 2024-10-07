@@ -1,16 +1,30 @@
+// Escuchar mensajes del popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.enabled) {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            const tabId = tabs[0].id;
-
-            chrome.scripting.executeScript({
-                target: { tabId },
-                files: ["content-script.js"],
-                world: "MAIN",
-            });
+    if (message.action === "getState") {
+        // Leer el estado de storage
+        chrome.storage.local.get(["enabled"], (result) => {
+            // Si no hay estado almacenado, por defecto estará habilitado
+            const isEnabled =
+                result.enabled !== undefined ? result.enabled : true;
+            sendResponse({ enabled: isEnabled });
         });
-
-        // Return true to indicate that the response will be sent asynchronously
+        // Mantener la conexión abierta para enviar la respuesta de forma asíncrona
         return true;
+    } else if (message.action === "setState" && message.enabled !== undefined) {
+        // Almacenar el nuevo estado en storage
+        chrome.storage.local.set({ enabled: message.enabled });
+    }
+});
+
+chrome.storage.local.get(["enabled"], (result) => {
+    if (result.enabled) {
+        chrome.scripting
+            .executeScript({
+                target: { tabId: getTabId() },
+                files: ["content-script.js"],
+                ExecutionWorld: "MAIN",
+                
+            })
+            .then(() => console.log("injected script file"));
     }
 });

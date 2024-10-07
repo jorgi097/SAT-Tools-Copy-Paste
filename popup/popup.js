@@ -1,20 +1,32 @@
 let enabledButton = document.querySelector("#enabledButton");
-let enabled = true;
-enabledButton.innerHTML = enabled ? "Habilitado" : "Deshabilitado";
+let enabledState = undefined;
 
-enabledButton.classList.add(enabled ? "enabledButton" : "disabledButton");
-    enabledButton.classList.remove(enabled ? "disabledButton" : "enabledButton");
-
-enabledButton.addEventListener("click", (e) => {
-    enabled = !enabled;
-    e.target.innerHTML = enabled ? "Habilitado" : "Deshabilitado";
+// Función para actualizar la interfaz
+function updateButtonState(enabled) {
+    enabledState = enabled;
+    enabledButton.innerHTML = enabled ? "Habilitado" : "Deshabilitado";
     enabledButton.classList.add(enabled ? "enabledButton" : "disabledButton");
     enabledButton.classList.remove(
-        !enabled ? "enabledButton" : "disabledButton"
+        enabled ? "disabledButton" : "enabledButton"
     );
-    let message = { enabled: enabled ? true : false };
-    chrome.runtime.sendMessage(message);
+}
 
+// Al abrir el popup, solicitar el estado al service worker
+chrome.runtime.sendMessage({ action: "getState" }, (response) => {
+    console.log(response);
+    if (response && response.enabled !== undefined) {
+        updateButtonState(response.enabled);
+    }
+});
+
+// Manejar el clic en el botón
+enabledButton.addEventListener("click", () => {
+    // Alternar el estado actual y modificar la interfaz
+    enabledState = !enabledState;
+    updateButtonState(enabledState);
+
+    // Enviar el nuevo estado al service worker para que lo guarde
+    chrome.runtime.sendMessage({ action: "setState", enabled: enabledState });
 });
 
 document
@@ -22,6 +34,3 @@ document
     .addEventListener("click", function () {
         window.open("https://portal.facturaelectronica.sat.gob.mx", "_blank");
     });
-
-
-
