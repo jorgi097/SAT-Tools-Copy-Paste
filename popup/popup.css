@@ -32,13 +32,13 @@ body {
     padding: 0.5rem;
     height: 100%;
     background-color: rgb(255 255 255);
-    border-radius: 10px;
+    border-radius: 4px;
     cursor: context-menu;
 }
 
 .popup-description_wraper {
     border: rgb(212, 212, 212) 1px solid;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 0 20px;
 }
 
@@ -53,12 +53,12 @@ body {
     padding: 0.5rem;
     min-height: 2rem;
     background-color: rgb(255 255 255);
-    border-radius: 10px;
+    border-radius: 4px;
 }
 
 .popup-message button {
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 4px;
     border: rgb(212, 212, 212) 1px solid;
     background-color: rgb(231, 231, 231);
     font-size: 0.9rem;
