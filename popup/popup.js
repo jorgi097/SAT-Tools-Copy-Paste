@@ -3,7 +3,6 @@ let enabledState = null;
 
 // Al abrir el popup, solicitar el estado al service worker
 chrome.runtime.sendMessage({ action: "getState" }, (response) => {
-    console.log(response);
     if (response && response.enabled !== undefined) {
         updateButtonState(response.enabled);
     }
@@ -26,13 +25,19 @@ function updateButtonState(enabled) {
 // Habilitar y deshabilitar el script principal
 enabledButton.addEventListener("click", () => {
     // Alternar el estado actual y modificar la interfaz
-    console.log("estado antes de click" + enabledState);
     enabledState = !enabledState;
-    console.log("estado despues de click" + enabledState);
     updateButtonState(enabledState);
 
     // Enviar el nuevo estado al service worker para que lo guarde
     chrome.runtime.sendMessage({ action: "setState", enabled: enabledState });
+    // Obtén la pestaña activa primero
+    chrome.tabs.query({ active: true, currentWindow: true }, ([activeTab]) => {
+        // Ejecuta el script en la pestaña activa
+        chrome.scripting.executeScript({
+            target: { tabId: activeTab.id },
+            func: reload,
+        });
+    });
 });
 
 // Abrir el portal de facturacion del SAT
@@ -41,3 +46,7 @@ document
     .addEventListener("click", function () {
         window.open("https://portal.facturaelectronica.sat.gob.mx", "_blank");
     });
+
+function reload() {
+    location.reload();
+}

@@ -11,7 +11,6 @@ chrome.runtime.onInstalled.addListener((details) => {
             allFrames: true,
         },
     ]);
-    console.log("Script registrado al inicio de instalacion");
 });
 
 let scripts = null;
@@ -36,9 +35,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                     (registeredScripts) => {
                         scripts = registeredScripts;
 
-                        console.log("scripts registrados");
-                        console.log(scripts);
-
                         if (result.enabled) {
                             // Si no está registrado, registrar el script
                             if (!scripts || scripts.length === 0) {
@@ -55,14 +51,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                         allFrames: true,
                                     },
                                 ]);
-                                console.log("Registered");
                             }
                         } else {
                             // Desregistrar el script
                             chrome.scripting.unregisterContentScripts({
                                 ids: ["paste-script"],
                             });
-                            console.log("Unregistered");
                         }
                     }
                 );
@@ -70,3 +64,5 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
     }
 });
+
+
