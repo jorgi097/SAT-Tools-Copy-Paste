@@ -18,7 +18,7 @@ function updateButtonState(enabled) {
     );
     enabledButton.setAttribute(
         "aria-label",
-        enabled ? "Selecciona para desactiivar" : "Selecciona para activar"
+        enabled ? "Desactiva y recarga la página" : "Activa y recarga la página"
     );
 }
 
@@ -30,13 +30,18 @@ enabledButton.addEventListener("click", () => {
 
     // Enviar el nuevo estado al service worker para que lo guarde
     chrome.runtime.sendMessage({ action: "setState", enabled: enabledState });
-    // Obtén la pestaña activa primero
+
     chrome.tabs.query({ active: true, currentWindow: true }, ([activeTab]) => {
-        // Ejecuta el script en la pestaña activa
-        chrome.scripting.executeScript({
-            target: { tabId: activeTab.id },
-            func: reload,
-        });
+        // Solo en la página de facturación
+        if (
+            activeTab.url ===
+            "https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura"
+        ) {
+            chrome.scripting.executeScript({
+                target: { tabId: activeTab.id },
+                func: reload,
+            });
+        }
     });
 });
 

@@ -1,3 +1,4 @@
+// Activar al instalarse
 chrome.runtime.onInstalled.addListener((details) => {
     chrome.storage.local.set({ enabled: true });
     chrome.scripting.registerContentScripts([
@@ -19,7 +20,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getState") {
         // Leer el estado de storage
         chrome.storage.local.get(["enabled"], (result) => {
-            // Si no hay estado almacenado, por defecto estará habilitado
             const isEnabled = result.enabled;
             sendResponse({ enabled: isEnabled });
         });
@@ -30,11 +30,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.storage.local.set({ enabled: message.enabled }, () => {
             // Verificar el valor después de establecerlo
             chrome.storage.local.get(["enabled"], (result) => {
-                // Obtener los scripts registrados de forma asíncrona
                 chrome.scripting.getRegisteredContentScripts(
                     (registeredScripts) => {
                         scripts = registeredScripts;
-
                         if (result.enabled) {
                             // Si no está registrado, registrar el script
                             if (!scripts || scripts.length === 0) {
@@ -64,5 +62,3 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
     }
 });
-
-
