@@ -21,9 +21,7 @@
         "https://portal.facturaelectronica.sat.gob.mx/*"
     ],
     "icons": {
-        "16": "src/Logo 128px.png",
-        "32": "src/Logo 48px.png",
-        "48": "src/Logo 32px.png",
-        "128": "src/Logo 16px.png"
+        "48": "src/Logo 48px.png",
+        "128": "src/Logo 128px.png"
     }
 }
