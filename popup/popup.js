@@ -51,22 +51,12 @@ enabledButton.addEventListener("click", () => {
 });
 
 
-
 // Abrir el portal de facturacion del SAT
 document
     .querySelector("#facturar")
     .addEventListener("click", function () {
         window.open("https://portal.facturaelectronica.sat.gob.mx", "_blank");
     });
-
-// Abrir el portal de facturacion del SAT
-document
-    .querySelector("#declarar")
-    .addEventListener("click", function () {
-        window.open("https://pstcdypisr.clouda.sat.gob.mx/", "_blank");
-    });
-
-    
 
 // Abrir el portal de facturacion del SAT
 document
