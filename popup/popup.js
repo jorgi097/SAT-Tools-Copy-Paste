@@ -22,6 +22,9 @@ function updateButtonState(enabled) {
     );
 }
 
+let taxDeclarationPattern = "https://pstcdypisr\\.clouda\\.sat\\.gob\\.mx/.*/";
+let taxDeclarationRegex = new RegExp(taxDeclarationPattern);
+
 // Habilitar y deshabilitar el script principal
 enabledButton.addEventListener("click", () => {
     // Alternar el estado actual y modificar la interfaz
@@ -36,6 +39,8 @@ enabledButton.addEventListener("click", () => {
         if (
             activeTab.url ===
             "https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura"
+            ||
+            taxDeclarationRegex.test(activeTab.url)
         ) {
             chrome.scripting.executeScript({
                 target: { tabId: activeTab.id },
@@ -45,13 +50,32 @@ enabledButton.addEventListener("click", () => {
     });
 });
 
+
+
 // Abrir el portal de facturacion del SAT
 document
-    .querySelector(".popup-message-link")
+    .querySelector("#facturar")
     .addEventListener("click", function () {
         window.open("https://portal.facturaelectronica.sat.gob.mx", "_blank");
     });
 
+// Abrir el portal de facturacion del SAT
+document
+    .querySelector("#declarar")
+    .addEventListener("click", function () {
+        window.open("https://pstcdypisr.clouda.sat.gob.mx/", "_blank");
+    });
+
+    
+
+// Abrir el portal de facturacion del SAT
+document
+    .querySelector("#declarar")
+    .addEventListener("click", function () {
+        window.open("https://pstcdypisr.clouda.sat.gob.mx/", "_blank");
+    });
+
+    
 function reload() {
     location.reload();
 }
