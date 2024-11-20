@@ -5,7 +5,10 @@ chrome.runtime.onInstalled.addListener((details) => {
             id: "paste-script",
             js: ["content-script.js"],
             persistAcrossSessions: true,
-            matches: ["https://portal.facturaelectronica.sat.gob.mx/*"],
+            matches: [
+                "https://portal.facturaelectronica.sat.gob.mx/*",
+                "https://pstcdypisr.clouda.sat.gob.mx/*"
+            ],
             runAt: "document_idle",
             world: "MAIN",
             allFrames: true,
@@ -49,6 +52,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                         persistAcrossSessions: true,
                                         matches: [
                                             "https://portal.facturaelectronica.sat.gob.mx/*",
+                                            "https://pstcdypisr.clouda.sat.gob.mx/*"
                                         ],
                                         runAt: "document_idle",
                                         world: "MAIN",
