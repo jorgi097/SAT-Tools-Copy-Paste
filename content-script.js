@@ -1,5 +1,5 @@
 // Main function to execute the code
-(function executeCode() {
+function executeCode() {
     // Enable right-click
     document.oncontextmenu = () => true;
 
@@ -19,11 +19,12 @@
     deleteOnPaste();
 
     // Just in case some elements are created on runtime
-    setInterval(deleteOnPaste, 10000);
+    setInterval(deleteOnPaste, 5000);
 
     // Removes the reverse listener that prevents CTRL + V from executing normally
-    function preventDefaultEvent(event) {  }
     let enableCtrl_V = document.createElement("script");
-    enableCtrl_V.innerHTML = `(function preventDefaultEvent(event) {  })()`;
+    enableCtrl_V.innerHTML = `function preventDefaultEvent(event) {  }`;
     document.body.appendChild(enableCtrl_V);
-})()
+}
+
+executeCode();
