@@ -27,4 +27,4 @@ function executeCode() {
     document.body.appendChild(enableCtrl_V);
 }
 
-executeCode();
+window.addEventListener('load', executeCode);
