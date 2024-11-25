@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener((details) => {
             persistAcrossSessions: true,
             matches: [
                 "https://portal.facturaelectronica.sat.gob.mx/*",
-                "https://pstcdypisr.clouda.sat.gob.mx/*"
+                "https://*.clouda.sat.gob.mx/*"
             ],
             runAt: "document_idle",
             world: "MAIN",
@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                         persistAcrossSessions: true,
                                         matches: [
                                             "https://portal.facturaelectronica.sat.gob.mx/*",
-                                            "https://pstcdypisr.clouda.sat.gob.mx/*"
+                                            "https://*.clouda.sat.gob.mx/*"
                                         ],
                                         runAt: "document_idle",
                                         world: "MAIN",

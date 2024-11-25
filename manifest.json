@@ -19,7 +19,7 @@
     },
     "host_permissions": [
         "https://portal.facturaelectronica.sat.gob.mx/*",
-        "https://pstcdypisr.clouda.sat.gob.mx/*"
+        "https://*.clouda.sat.gob.mx/*"
     ],
     "icons": {
         "48": "src/Logo 48px.png",
