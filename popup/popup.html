@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Herramientas SAT (Copiar-Pegar)</title>
-        <link rel="stylesheet" href="/popup/normalize.css" />
-        <link rel="stylesheet" href="/lib/hint.css-2.7.0/hint.min.css" />
-        <link rel="stylesheet" href="/popup/popup.css" />
-        <script defer src="/popup/popup.js"></script>
-    </head>
-    <body>
-        <div class="title-container">
-            <div class="logo-container">
-                <img src="../src/Logo.svg" alt="Logo">
-            </div>
-            <div class="popup-title">
-                <h2 class=>HERRAMIENTAS SAT<br/>(COPIAR-PEGAR)</h2>
-            </div>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Herramientas SAT (Copiar-Pegar)</title>
+    <link rel="stylesheet" href="/popup/normalize.css" />
+    <link rel="stylesheet" href="/lib/hint.css-2.7.0/hint.min.css" />
+    <link rel="stylesheet" href="/popup/popup.css" />
+    <script defer src="/popup/popup.js"></script>
+</head>
+
+<body>
+
+    <div class="title-container">
+        <div class="logo-container">
+            <img src="../src/Logo.svg" alt="Logo">
         </div>
+        <div class="popup-title">
+            <h2 class=>HERRAMIENTAS SAT<br />(COPIAR-PEGAR)</h2>
+        </div>
+    </div>
+
+    <div class="popup-description">
+        <div class="popup-description_wraper">
+            <p><b>Copia y Pega</b> en los<br>Portales del SAT</p>
+        </div>
+    </div>
+
+    <div class="popup-option">
+        <button id="enabledButton" class="hint--top-right hint--rounded hint--info" aria-label="">
+            Loading...
+        </button>
+    </div>
+
+    <div class="popup-option" id="facturar">
+        <button class="normal-button hint--top-right hint--rounded hint--info" aria-label="Abrir portal de facturación">
+            Ir a Facturar
+        </button>
+    </div>
+
+    <div class="popup-option flex-spacing" id="declarar">
         
-        <div class="popup-description">
-            <div class="popup-description_wraper">
-                <p><b>Habilita copiar y pegar</b> en los portales de facturación y declaraciones del SAT.</p>
-                <!-- <p>Ademas habilita el menu contextual con el click derecho.</p> -->
-            </div>
-            
-        </div>
-        <div class="popup-message">
-            <button id="enabledButton" class="hint--top-right hint--rounded hint--info" aria-label="">
-                Loading...
-            </button>
-        </div>
-        <div class="popup-message popup-message-link" id="facturar">
-            <button class="invoice hint--top-right hint--rounded hint--info" aria-label="Abrir el portal de facturación">
-                Ir a facturar
-            </button>
-        </div>
-        <div class="popup-message popup-message-link" id="declarar">
-            <button class="invoice hint--top-right hint--rounded hint--info" aria-label="Abrir el portal de declaraciones">
-                Ir a declarar
-            </button>
-        </div>
-    </body>
+            <p class="popup-option_title">Ir a Declarar</p>
+       
+        <button id="declarar-1" class="normal-button hint--top-right hint--rounded hint--info" aria-label="Abrir el portal viejo">
+            Portal Viejo
+        </button>
+        <button id="declarar-2" class="normal-button hint--top-left hint--rounded hint--info" aria-label="Abrir el portal nuevo">
+            Portal Nuevo
+        </button>
+    </div>
+
+</body>
+
 </html>
