@@ -18,7 +18,7 @@ function updateButtonState(enabled) {
     );
     enabledButton.setAttribute(
         "aria-label",
-        enabled ? "Desactiva y recarga la página" : "Activa y recarga la página"
+        enabled ? "Desactivar y recargar la página" : "Activar y recargar la página"
     );
 }
 

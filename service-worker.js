@@ -4,13 +4,22 @@ chrome.runtime.onInstalled.addListener((details) => {
     chrome.scripting.registerContentScripts([
         {
             id: "paste-script",
-            js: ["content-script.js"],
+            js: ["paste.js"],
             persistAcrossSessions: true,
             matches: [
                 "https://portal.facturaelectronica.sat.gob.mx/*",
-                "https://*.clouda.sat.gob.mx/*"
+                "https://*.clouda.sat.gob.mx/*",
             ],
             runAt: "document_idle",
+            world: "MAIN",
+            allFrames: true,
+        },
+        {
+            id: "autocomplete-script",
+            js: ["autocomplete.js"],
+            persistAcrossSessions: true,
+            matches: ["https://portal.facturaelectronica.sat.gob.mx/*"],
+            runAt: "document_start",
             world: "MAIN",
             allFrames: true,
         },
@@ -42,13 +51,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                 chrome.scripting.registerContentScripts([
                                     {
                                         id: "paste-script",
-                                        js: ["content-script.js"],
+                                        js: ["paste.js"],
                                         persistAcrossSessions: true,
                                         matches: [
                                             "https://portal.facturaelectronica.sat.gob.mx/*",
-                                            "https://*.clouda.sat.gob.mx/*"
+                                            "https://*.clouda.sat.gob.mx/*",
                                         ],
                                         runAt: "document_idle",
+                                        world: "MAIN",
+                                        allFrames: true,
+                                    },
+                                    {
+                                        id: "autocomplete-script",
+                                        js: ["autocomplete.js"],
+                                        persistAcrossSessions: true,
+                                        matches: [
+                                            "https://portal.facturaelectronica.sat.gob.mx/*",
+                                        ],
+                                        runAt: "document_start",
                                         world: "MAIN",
                                         allFrames: true,
                                     },
@@ -57,7 +77,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                         } else {
                             // Desregistrar el script
                             chrome.scripting.unregisterContentScripts({
-                                ids: ["paste-script"],
+                                ids: ["paste-script", "autocomplete-script"],
                             });
                         }
                     }
