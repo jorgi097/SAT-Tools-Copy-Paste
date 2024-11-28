@@ -45,7 +45,6 @@ const obtenerElementosInterval = setInterval(() => {
     }
 }, obtenerTimeOut);
 
-//----------------------MAIN FUNCTIONALITY-----------------------------------------
 
 function interceptFavorites() {
     const originalSend = XMLHttpRequest.prototype.send;
@@ -62,7 +61,6 @@ function interceptFavorites() {
 
 interceptFavorites();
 
-//--------------------------------------------------------------------------------
 
 function autocomplete() {
     if (clienteFrecuenteElement) {
