@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(details => {
     chrome.scripting.registerContentScripts([
         {
             id: 'paste-script',
-            js: ['paste.js'],
+            js: ['background/paste.js'],
             persistAcrossSessions: true,
             matches: [
                 'https://portal.facturaelectronica.sat.gob.mx/*',
@@ -16,7 +16,7 @@ chrome.runtime.onInstalled.addListener(details => {
         },
         {
             id: 'autocomplete-script',
-            js: ['autocomplete.js'],
+            js: ['background/autocomplete.js'],
             persistAcrossSessions: true,
             matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
             runAt: 'document_start',
@@ -25,7 +25,16 @@ chrome.runtime.onInstalled.addListener(details => {
         },
         {
             id: 'footer-script',
-            js: ['footer.js'],
+            js: ['background/footer.js'],
+            persistAcrossSessions: true,
+            matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
+            runAt: 'document_idle',
+            world: 'MAIN',
+            allFrames: true,
+        },
+        {
+            id: 'no-frecuent-script',
+            js: ['background/no-frecuent.js'],
             persistAcrossSessions: true,
             matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
             runAt: 'document_idle',
@@ -60,7 +69,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                 chrome.scripting.registerContentScripts([
                                     {
                                         id: 'paste-script',
-                                        js: ['paste.js'],
+                                        js: ['background/paste.js'],
                                         persistAcrossSessions: true,
                                         matches: [
                                             'https://portal.facturaelectronica.sat.gob.mx/*',
@@ -72,7 +81,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                     },
                                     {
                                         id: 'autocomplete-script',
-                                        js: ['autocomplete.js'],
+                                        js: ['background/autocomplete.js'],
                                         persistAcrossSessions: true,
                                         matches: [
                                             'https://portal.facturaelectronica.sat.gob.mx/*',
@@ -83,7 +92,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                     },
                                     {
                                         id: 'footer-script',
-                                        js: ['footer.js'],
+                                        js: ['background/footer.js'],
+                                        persistAcrossSessions: true,
+                                        matches: [
+                                            'https://portal.facturaelectronica.sat.gob.mx/*',
+                                        ],
+                                        runAt: 'document_idle',
+                                        world: 'MAIN',
+                                        allFrames: true,
+                                    },
+                                    {
+                                        id: 'no-frecuent-script',
+                                        js: ['background/no-frecuent.js'],
                                         persistAcrossSessions: true,
                                         matches: [
                                             'https://portal.facturaelectronica.sat.gob.mx/*',
@@ -101,6 +121,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                     'paste-script',
                                     'autocomplete-script',
                                     'footer-script',
+                                    'no-frecuent',
                                 ],
                             });
                         }

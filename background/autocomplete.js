@@ -5,7 +5,8 @@ let clienteFrecuenteElement,
     razonSocial,
     cp,
     regimenFiscal,
-    usoFactura;
+    usoFactura,
+    rfcInput;
 let excluirFrecuentes = ["XAXX010101000", "XEXX010101000", "Otro"]; // Elementos a exluir de clientes frecuentes
 let obtenerTimeOut = 2500;
 let validationTimeOut = 500;
@@ -18,6 +19,7 @@ const obtenerElementosInterval = setInterval(() => {
     cp = document.querySelector("#\\31 35textbox61"); // Codigo Postal Asociado
     regimenFiscal = document.querySelector("#\\31 35textboxautocomplete62"); // Regimen Fiscal Asociado
     usoFactura = document.querySelector("#\\31 35textboxautocomplete72"); // Uso factura Asociado
+    rfcInput = document.querySelector('#\\31 35textbox59'); // RFC cliente no registrado;
 
     if (!!clienteFrecuenteElement) {
         clienteFrecuenteElement.dispatchEvent(new Event("focus"));
