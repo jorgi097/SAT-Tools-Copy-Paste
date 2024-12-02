@@ -1,10 +1,10 @@
-const noFrecuenteInterval = setInterval(() => {
-    if (!!clienteFrecuenteElement) {
-        clienteFrecuenteElement.addEventListener('blur', noFrecuente);
-        clearInterval(noFrecuenteInterval);
-    }
-}, 1000 * 10);
+function reloadSite() {
+    console.log("reloaded");
+    location.reload();
 
-function noFrecuente() {
-    
 }
+setTimeout(
+    reloadSite,
+    (Math.floor(Math.random() * (12 - 9 + 1)) + 9) * 1000 * 60
+);
+

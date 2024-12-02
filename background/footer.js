@@ -7,7 +7,7 @@ function waitForElements() {
             if (!!space && !!footer) {
                 resolve({ space, footer });
             } else {
-                setTimeout(checkElements, 100);
+                setTimeout(checkElements, 500);
             }
         };
 
@@ -16,7 +16,7 @@ function waitForElements() {
         // Límite de tiempo
         setTimeout(() => {
             reject(new Error('No se pudieron encontrar los elementos'));
-        }, 1000 * 30);
+        }, 1000 * 60);
     });
 }
 
@@ -31,3 +31,4 @@ async function hideElements() {
 }
 
 hideElements();
+
