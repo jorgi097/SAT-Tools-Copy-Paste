@@ -1,15 +1,34 @@
 const favorites = []; // Aqui se guardaran los datos completos de clientes frecuentes
 
-const clientQuery = '#\\31 35textboxautocomplete55',
-    razonSocialQuery = '#\\31 35textbox60',
-    cpQuery = '#\\31 35textbox61',
-    regimenFiscalQuery = '#\\31 35textboxautocomplete62',
-    usoFacturaQuery = '#\\31 35textboxautocomplete71';
+const clientQuery = '#\\31 35textboxautocomplete55';
 
-const rfcNoFrecuentQuery = '#\\31 35textbox59',
-    usoFacturaNoFrecuentQuery = '#\\31 35textboxautocomplete72';
+const frequentElementQueries = {
+    razonSocial: '#\\31 35textbox60',
+    cp: '#\\31 35textbox61',
+    regimenFiscal: '#\\31 35textboxautocomplete62',
+    usoFactura: '#\\31 35textboxautocomplete71',
+};
 
-const excluirFrecuentes = ['XAXX010101000', 'XEXX010101000', 'Otro']; // Elementos a excluir de clientes frecuentes
+const excluirClient = ['XAXX010101000', 'XEXX010101000', 'Otro']; // Elementos a excluir de clientes frecuentes
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+function interceptFavorites() {
+    const originalSend = XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.send = function (...args) {
+        this.addEventListener('load', function () {
+            if (this.responseText.includes('Historicos')) {
+                const favoritesData = JSON.parse(JSON.parse(this.responseText));
+                favorites.push(...favoritesData.Favoritos.Receptores);
+            }
+        });
+        originalSend.apply(this, args);
+    };
+}
+
+interceptFavorites();
+
+//-----------------------------------------------------------------------------------------------------------------------
 
 function getDomElement(querySelector) {
     return new Promise((resolve, reject) => {
@@ -31,30 +50,13 @@ function getDomElement(querySelector) {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-function interceptFavorites() {
-    const originalSend = XMLHttpRequest.prototype.send;
-    XMLHttpRequest.prototype.send = function (...args) {
-        this.addEventListener('load', function () {
-            if (this.responseText.includes('Historicos')) {
-                const favoritesData = JSON.parse(JSON.parse(this.responseText));
-                favorites.push(...favoritesData.Favoritos.Receptores);
-            }
-        });
-        originalSend.apply(this, args);
-    };
-}
-
-interceptFavorites();
-
-//-----------------------------------------------------------------------------------------------------------------------
-
-async function autocomplete() {
+async function frequentAutocomplete() {
     const client = await getDomElement(clientQuery);
     client.addEventListener('blur', async e => {
         const currentValue = e.target.value;
-        const cp = await getDomElement(cpQuery);
+        const cp = await getDomElement(frequentElementQueries.cp);
 
-        if (currentValue !== '' && !excluirFrecuentes.includes(currentValue)) {
+        if (currentValue !== '' && !excluirClient.includes(currentValue)) {
             const matchedFavorite = favorites.find(
                 favorite => favorite.RFCReceptor === currentValue
             );
@@ -71,4 +73,4 @@ async function autocomplete() {
     });
 }
 
-autocomplete();
+frequentAutocomplete();

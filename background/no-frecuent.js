@@ -1,14 +1,27 @@
-const rfcNoFrecuentId = '135textbox59',
-    razonSocialId = '135textbox60',
-    cpId = '135textbox61',
-    regimenFiscalId = '135textboxautocomplete62',
-    usoFacturaNoFrecuentId = '135textboxautocomplete72';
+const noFrecuentIds = {
+    rfc: '135textbox59',
+    razonSocial: '135textbox60',
+    cp: '135textbox61',
+    regimenFiscal: '135textboxautocomplete62',
+    usoFactura: '135textboxautocomplete72',
+};
 
-function hasError(element) {
-    return element.classList.contains('alert');
-}
+const noFrequentElementQueries = {
+    rfcNoFrecuentQuery: '#\\31 35textbox59',
+    razonSocialQuery: '#\\31 35textbox60',
+    cpQuery: '#\\31 35textbox61',
+    regimenFiscalQuery: '#\\31 35textboxautocomplete62',
+    usoFacturaNoFrecuentQuery: '#\\31 35textboxautocomplete72',
+};
 
 class noFrecuentClient {
+    constructor(rfc, razonSocial, cp, regimenFiscal, usoFactura) {
+        this.rfc = rfc;
+        this.razonSocial = razonSocial;
+        this.cp = cp;
+        this.regimenFiscal = regimenFiscal;
+        this.usoFactura = usoFactura;
+    }
     rfc;
     razonSocial;
     cp;
@@ -16,60 +29,44 @@ class noFrecuentClient {
     usoFactura;
 }
 
-const currentClient = new noFrecuentClient();
+let currentClient = new noFrecuentClient();
 
-function noFrecuent(e) {
-    const currentElement = e.target;
-    const currentTrigger = e.target.id;
-    setTimeout(() => {
-        if (currentTrigger === rfcNoFrecuentId) {
-            if (!hasError(currentElement)) {
-                currentClient.rfc = e.target.value;
-                console.log(`Correcto: ${e.target.value}`);
-            } else {
-                currentClient.rfc = '';
-                console.log(`Incorrecto: ${e.target.value}`);
-            }
-        } else if (currentTrigger === razonSocialId) {
-            if (!hasError(currentElement)) {
-                currentClient.razonSocial = e.target.value;
-                console.log(`Correcto: ${e.target.value}`);
-            } else {
-                currentClient.razonSocial = '';
-                console.log(`Incorrecto: ${e.target.value}`);
-            }
-        } else if (currentTrigger === cpId) {
-            if (!hasError(currentElement)) {
-                currentClient.cp = e.target.value;
-                console.log(`Correcto: ${e.target.value}`);
-            } else {
-                currentClient.cp = '';
-                console.log(`Incorrecto: ${e.target.value}`);
-            }
-        } else if (currentTrigger === regimenFiscalId) {
-            if (!hasError(currentElement)) {
-                currentClient.regimenFiscal = e.target.value;
-                console.log(`Correcto: ${e.target.value}`);
-            } else {
-                currentClient.regimenFiscal = '';
-                console.log(`Incorrecto: ${e.target.value}`);
-            }
-        } else if (currentTrigger === usoFacturaNoFrecuentId) {
-            if (!hasError(currentElement)) {
-                currentClient.usoFactura = e.target.value;
-                console.log(`Correcto: ${e.target.value}`);
-            } else {
-                currentClient.usoFactura = '';
-                console.log(`Incorrecto: ${e.target.value}`);
-            }
-        }
+function hasError(element) {
+    return element.classList.contains('alert');
+}
+
+function noFrecuentHandler(e) {
+    async function saveValues() {
+        const clientElements = await Promise.all(
+            Object.values(noFrequentElementQueries).map(getDomElement)
+        );
+
+        const clientValues = clientElements.map(elem => elem.value);
+        return [clientElements, clientValues];
+    }
+
+    setTimeout(async () => {
+        const [clientElements, clientValues] = await saveValues();
+
         if (
-            Object.values(currentClient).every(
+            clientValues.every(
                 val => val !== null && val !== undefined && val !== ''
-            )
+            ) &&
+            clientElements.every(elem => !hasError(elem))
         ) {
-            let print = Object.values(currentClient).toString();
+            currentClient = new noFrecuentClient(...clientValues);
+            insertSaveButton();
+            const insertedSaveButton = await getDomElement('#saveButton');
+            insertedSaveButton.addEventListener('click', e => {
+                e.preventDefault();
+                // e.stopImmediatePropagation();
+                console.log('saved');
+            });
+
+            let print = Object.values(clientValues).toString();
             console.log(`Completo: ${print}`);
+        } else {
+            currentClient = new noFrecuentClient();
         }
     }, 1200);
 }
@@ -78,32 +75,32 @@ async function noFrecuentAutocomplete() {
     const client = await getDomElement(clientQuery);
     client.addEventListener('blur', async e => {
         const currentValue = e.target.value;
-        const rfc = await getDomElement(rfcNoFrecuentQuery);
-        const razonSocial = await getDomElement(razonSocialQuery);
-        const cp = await getDomElement(cpQuery);
-        const regimenFiscal = await getDomElement(regimenFiscalQuery);
-        const usoFactura = await getDomElement(usoFacturaNoFrecuentQuery);
-
-        const clientVariables = [
-            rfc,
-            razonSocial,
-            cp,
-            regimenFiscal,
-            usoFactura,
-        ];
+        const clientVariables = await Promise.all(
+            Object.values(noFrequentElementQueries).map(getDomElement)
+        );
 
         if (currentValue === 'Otro') {
             clientVariables.forEach(element => {
-                element.addEventListener('blur', noFrecuent);
+                element.addEventListener('blur', noFrecuentHandler);
             });
-        } else {
-            if (currentValue === 'Otro') {
-                clientVariables.forEach(element => {
-                    element.removeEventListener('blur', noFrecuent);
-                });
-            }
+        } else if (currentValue !== 'Otro') {
+            clientVariables.forEach(element => {
+                element.removeEventListener('blur', noFrecuentHandler);
+            });
         }
     });
 }
 
 noFrecuentAutocomplete();
+
+async function insertSaveButton() {
+    const saveButton = document.createElement('button');
+    saveButton.innerText = 'Guardar Contacto';
+    saveButton.style =
+        'margin-top : 28px; height : 30px; border:0.8px solid rgb(204, 204, 204); width: 200px; border-radius: 4px; background-color: rgb(245, 245, 245);';
+    saveButton.id = 'saveButton';
+    const saveButtonColumn = await getDomElement(
+        '#A135row7 > div.panel-body > div:nth-child(6)'
+    );
+    saveButtonColumn.appendChild(saveButton);
+}

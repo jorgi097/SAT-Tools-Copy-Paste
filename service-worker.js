@@ -121,7 +121,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                     'paste-script',
                                     'autocomplete-script',
                                     'footer-script',
-                                    'no-frecuent',
+                                    'no-frecuent-script',
                                 ],
                             });
                         }
