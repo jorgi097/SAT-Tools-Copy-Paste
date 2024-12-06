@@ -1,4 +1,22 @@
-const noFrecuentIds = {
+function getDomElement(querySelector) {
+    return new Promise((resolve, reject) => {
+        const chekElementExist = () => {
+            const element = document.querySelector(querySelector);
+            if (!!element) {
+                resolve(element);
+            } else {
+                setTimeout(chekElementExist, 500);
+            }
+        };
+        chekElementExist();
+
+        setTimeout(() => {
+            reject(new Error('No se pudieron encontrar los elementos'));
+        }, 1000 * 60);
+    });
+}
+
+const noFrecuentElementIds = {
     rfc: '135textbox59',
     razonSocial: '135textbox60',
     cp: '135textbox61',
@@ -6,12 +24,14 @@ const noFrecuentIds = {
     usoFactura: '135textboxautocomplete72',
 };
 
+const clientQuery = '#\\31 35textboxautocomplete55';
+
 const noFrequentElementQueries = {
-    rfcNoFrecuentQuery: '#\\31 35textbox59',
-    razonSocialQuery: '#\\31 35textbox60',
-    cpQuery: '#\\31 35textbox61',
-    regimenFiscalQuery: '#\\31 35textboxautocomplete62',
-    usoFacturaNoFrecuentQuery: '#\\31 35textboxautocomplete72',
+    rfc: '#\\31 35textbox59',
+    razonSocial: '#\\31 35textbox60',
+    cp: '#\\31 35textbox61',
+    regimenFiscal: '#\\31 35textboxautocomplete62',
+    usoFactura: '#\\31 35textboxautocomplete72',
 };
 
 class noFrecuentClient {
@@ -35,18 +55,25 @@ function hasError(element) {
     return element.classList.contains('alert');
 }
 
+async function insertSaveButton() {
+    const saveButton = document.createElement('button');
+    saveButton.innerText = 'Guardar Cliente';
+    saveButton.style =
+        'margin-top : 28px; height : 30px; border:0.8px solid rgb(204, 204, 204); width: 200px; border-radius: 4px; background-color: rgb(245, 245, 245);';
+    saveButton.id = 'saveButton';
+    const saveButtonColumn = await getDomElement(
+        '#A135row7 > div.panel-body > div:nth-child(6)'
+    );
+    saveButtonColumn.appendChild(saveButton);
+}
+
 function noFrecuentHandler(e) {
-    async function saveValues() {
+    setTimeout(async () => {
         const clientElements = await Promise.all(
             Object.values(noFrequentElementQueries).map(getDomElement)
         );
 
         const clientValues = clientElements.map(elem => elem.value);
-        return [clientElements, clientValues];
-    }
-
-    setTimeout(async () => {
-        const [clientElements, clientValues] = await saveValues();
 
         if (
             clientValues.every(
@@ -59,7 +86,23 @@ function noFrecuentHandler(e) {
             const insertedSaveButton = await getDomElement('#saveButton');
             insertedSaveButton.addEventListener('click', e => {
                 e.preventDefault();
-                // e.stopImmediatePropagation();
+                chrome.storage.local.get('noFrecuent', result => {
+                    const noFrecuent = result.noFrecuent || [];
+
+                    // Buscamos el índice del cliente actual en el array.
+                    const index = noFrecuent.findIndex(
+                        client => client.rfc === currentClient.rfc
+                    );
+
+                    if (index !== -1) {
+                        // Si el cliente ya existe, actualizamos su información.
+                        noFrecuent[index] = currentClient;
+                    } else {
+                        // Si no existe, lo añadimos al array.
+                        noFrecuent.push(currentClient);
+                    }
+                    chrome.storage.local.set({ noFrecuent });
+                });
                 console.log('saved');
             });
 
@@ -71,7 +114,7 @@ function noFrecuentHandler(e) {
     }, 1200);
 }
 
-async function noFrecuentAutocomplete() {
+async function noFrecuentSave() {
     const client = await getDomElement(clientQuery);
     client.addEventListener('blur', async e => {
         const currentValue = e.target.value;
@@ -91,16 +134,10 @@ async function noFrecuentAutocomplete() {
     });
 }
 
-noFrecuentAutocomplete();
+noFrecuentSave();
 
-async function insertSaveButton() {
-    const saveButton = document.createElement('button');
-    saveButton.innerText = 'Guardar Contacto';
-    saveButton.style =
-        'margin-top : 28px; height : 30px; border:0.8px solid rgb(204, 204, 204); width: 200px; border-radius: 4px; background-color: rgb(245, 245, 245);';
-    saveButton.id = 'saveButton';
-    const saveButtonColumn = await getDomElement(
-        '#A135row7 > div.panel-body > div:nth-child(6)'
-    );
-    saveButtonColumn.appendChild(saveButton);
-}
+
+chrome.runtime.sendMessage({action : 'getClients'}, (response)=>{
+    console.log(response);
+});
+

@@ -1,3 +1,21 @@
+function getDomElement(querySelector) {
+    return new Promise((resolve, reject) => {
+        const chekElementExist = () => {
+            const element = document.querySelector(querySelector);
+            if (!!element) {
+                resolve(element);
+            } else {
+                setTimeout(chekElementExist, 500);
+            }
+        };
+        chekElementExist();
+
+        setTimeout(() => {
+            reject(new Error('No se pudieron encontrar los elementos'));
+        }, 1000 * 60);
+    });
+}
+
 const favorites = []; // Aqui se guardaran los datos completos de clientes frecuentes
 
 const clientQuery = '#\\31 35textboxautocomplete55';
@@ -27,26 +45,6 @@ function interceptFavorites() {
 }
 
 interceptFavorites();
-
-//-----------------------------------------------------------------------------------------------------------------------
-
-function getDomElement(querySelector) {
-    return new Promise((resolve, reject) => {
-        const chekElementExist = () => {
-            const element = document.querySelector(querySelector);
-            if (!!element) {
-                resolve(element);
-            } else {
-                setTimeout(chekElementExist, 500);
-            }
-        };
-        chekElementExist();
-
-        setTimeout(() => {
-            reject(new Error('No se pudieron encontrar los elementos'));
-        }, 1000 * 60);
-    });
-}
 
 //-----------------------------------------------------------------------------------------------------------------------
 
