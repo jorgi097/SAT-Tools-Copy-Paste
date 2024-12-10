@@ -24,7 +24,7 @@ const frequentElementQueries = {
     razonSocial: '#\\31 35textbox60',
     cp: '#\\31 35textbox61',
     regimenFiscal: '#\\31 35textboxautocomplete62',
-    usoFactura: '#\\31 35textboxautocomplete71',
+    usoFactura: '#\\31 35textboxautocomplete66', //VACIA O FRECUENTE: MORAL O FISICA
 };
 
 const excluirClient = ['XAXX010101000', 'XEXX010101000', 'Otro']; // Elementos a excluir de clientes frecuentes
@@ -53,20 +53,44 @@ async function frequentAutocomplete() {
     client.addEventListener('blur', async e => {
         const currentValue = e.target.value;
         const cp = await getDomElement(frequentElementQueries.cp);
+        const regimenFiscal = await getDomElement(
+            frequentElementQueries.regimenFiscal
+        );
 
         if (currentValue !== '' && !excluirClient.includes(currentValue)) {
             const matchedFavorite = favorites.find(
                 favorite => favorite.RFCReceptor === currentValue
             );
 
-            cp.value = matchedFavorite.CodigoPostal;
-            cp.dispatchEvent(new Event('blur'));
+            if (matchedFavorite !== undefined) {
+                console.log(matchedFavorite);
+                cp.value = matchedFavorite.CodigoPostal;
+                cp.dispatchEvent(new Event('blur'));
 
-            // regimenFiscal.value = matchedFavorite.regimenFiscalDescripcion;
-            // regimenFiscal.dispatchEvent(new Event("blur"));
+                setTimeout(() => {
+                    let cleanWord = /[^-0-9]+$/;
+                    let cleanRegimen =
+                        matchedFavorite.RegimenFiscalDescripcion.match(
+                            cleanWord
+                        )[0].trim();
+
+                    // Encuentra el modelo de Knockout asociado al elemento
+                    let knockoutModel = ko.dataFor(regimenFiscal);
+
+                    // Si hay un modelo, actualiza la propiedad vinculada
+                    if (knockoutModel && knockoutModel.E1350003PFAC103) {
+                        knockoutModel.E1350003PFAC103(cleanRegimen); // Actualiza el observable de Knockout
+                        regimenFiscal.dispatchEvent(new Event('input'));
+                        regimenFiscal.dispatchEvent(new Event('change'));
+                        regimenFiscal.dispatchEvent(new Event('blur'));
+                    }
+                }, 1000);
+            }
         } else {
             cp.value = '';
             cp.dispatchEvent(new Event('blur'));
+            regimenFiscal.value = '';
+            regimenFiscal.dispatchEvent(new Event('blur'));
         }
     });
 }

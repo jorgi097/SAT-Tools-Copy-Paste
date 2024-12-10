@@ -1,0 +1,12 @@
+.hide {
+    display: none;
+}
+
+.saveButton {
+    margin-top: 28px;
+    height: 30px;
+    border: 0.8px solid rgb(204, 204, 204);
+    width: 200px;
+    border-radius: 4px;
+    background-color: rgb(245, 245, 245);
+}

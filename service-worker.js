@@ -1,7 +1,7 @@
 const scripts = [
     {
         id: 'paste-script',
-        js: ['content/paste.js'],
+        js: ['content-scripts/paste.js'],
         persistAcrossSessions: true,
         matches: [
             'https://portal.facturaelectronica.sat.gob.mx/*',
@@ -13,7 +13,7 @@ const scripts = [
     },
     {
         id: 'autocomplete-script',
-        js: ['content/autocomplete.js'],
+        js: ['content-scripts/autocomplete.js'],
         persistAcrossSessions: true,
         matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
         runAt: 'document_start',
@@ -22,7 +22,7 @@ const scripts = [
     },
     {
         id: 'no-frecuent-script',
-        js: ['content/no-frecuent.js'],
+        js: ['content-scripts/no-frecuent.js'],
         persistAcrossSessions: true,
         matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
         runAt: 'document_idle',
@@ -31,39 +31,29 @@ const scripts = [
     },
     {
         id: 'footer-script',
-        js: ['content/footer.js'],
+        js: ['content-scripts/footer.js'],
         persistAcrossSessions: true,
         matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
         runAt: 'document_idle',
         world: 'ISOLATED',
         allFrames: true,
     },
+    // {
+    //     id: 'testing-script',
+    //     js: ['content-scripts/testing.js'],
+    //     persistAcrossSessions: true,
+    //     matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
+    //     runAt: 'document_idle',
+    //     world: 'ISOLATED',
+    //     allFrames: true,
+    // },
 ];
 
 chrome.runtime.onInstalled.addListener(details => {
     if (details.reason === 'install') {
-        chrome.storage.local.set(
-            {
-                enabled: true,
-                noFrecuent: [
-                    {
-                        rfc: 'GACJ971003HU5',
-                        razonSocial: 'JORGE GARCIA',
-                        cp: '45070',
-                        regimenFiscal: 'PFCAE',
-                        usoFactura: 'GEG',
-                    },
-                ],
-            },
-            () => {
-                console.log('Configuración inicial guardada.');
-                chrome.storage.local.get(['noFrecuent'], result => {
-                    console.log(
-                        `DESDE SERVICE: ${JSON.stringify(result.noFrecuent)}`
-                    );
-                });
-            }
-        );
+        chrome.storage.local.set({ enabled: true }, () => {
+            console.log('Configuración inicial guardada.');
+        });
     }
     chrome.scripting.registerContentScripts(scripts);
 });
@@ -103,7 +93,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                                     'autocomplete-script',
                                     'footer-script',
                                     'no-frecuent-script',
-                                    'intermediate-script',
+                                    // 'testing-script',
                                 ],
                             });
                         }
@@ -115,15 +105,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 // Escuchar mensajes de content-scripts
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'getClients') {
-        chrome.storage.local.get('noFrecuent', items => {
-            if (chrome.runtime.lastError) {
-                console.error(chrome.runtime.lastError);
-                return;
-            }
-            sendResponse(items);
-        });
-    }
-    return true;
-});
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//     if (message.action === 'getClients') {
+//         chrome.storage.local.get('noFrecuent', items => {
+//             if (chrome.runtime.lastError) {
+//                 console.error(chrome.runtime.lastError);
+//                 return;
+//             }
+//             sendResponse(items);
+//         });
+//     }
+//     return true;
+// });

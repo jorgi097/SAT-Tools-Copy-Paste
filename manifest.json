@@ -18,6 +18,15 @@
         "default_title": "Herramientas SAT (Copiar-Pegar)",
         "default_popup": "popup/popup.html"
     },
+    "content_scripts": [
+   {
+     "matches": ["https://portal.facturaelectronica.sat.gob.mx/*"],
+     "css": ["content-scripts/nofrecuent.css"],   
+     "all_frames": true,
+     "run_at": "document_idle",
+     "world": "ISOLATED"
+   }
+ ],
     "host_permissions": [
         "https://portal.facturaelectronica.sat.gob.mx/*",
         "https://*.clouda.sat.gob.mx/*"
