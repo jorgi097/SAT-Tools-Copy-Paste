@@ -1,17 +1,20 @@
 function getDomElement(querySelector) {
     return new Promise((resolve, reject) => {
-        const chekElementExist = () => {
+        const checkElementExist = () => {
             const element = document.querySelector(querySelector);
-            if (!!element) {
+            if (element) {
                 resolve(element);
             } else {
-                setTimeout(chekElementExist, 500);
+                setTimeout(checkElementExist, 500);
             }
         };
-        chekElementExist();
+        checkElementExist();
 
         setTimeout(() => {
-            reject(new Error('No se pudieron encontrar los elementos'));
+            const element = document.querySelector(querySelector);
+            if (!element) {
+                reject(new Error('No se pudieron encontrar los elementos'));
+            }
         }, 1000 * 60);
     });
 }
@@ -42,6 +45,24 @@ const noFrequentElementQueries = {
     usoFacturaFisica: '#\\31 35textboxautocomplete72', // 71 NO FRECUENTE: MORAL Y 72 NO FRECUENTE: FISICA
     usoFacturaMoral: '#\\31 35textboxautocomplete71', // 71 NO FRECUENTE: MORAL Y 72 NO FRECUENTE: FISICA
 };
+
+const getNoFrecuentElements = async () => {
+    const clientElements = await Promise.all(
+        Object.values(noFrequentElementQueries).map(getDomElement)
+    );
+    return clientElements;
+};
+
+clientElements = getNoFrecuentElements();
+
+const [
+    rfcNoFrecuent,
+    razonSocialNoFrecuent,
+    cpNoFrecuent,
+    regimenFiscalNoFrecuent,
+    usoFacturaFisicaNoFrecuent,
+    usoFacturaMoralNoFrecuent,
+] = clientElements;
 
 class noFrecuentClient {
     constructor(rfc, razonSocial, cp, regimenFiscal, usoFactura) {
@@ -77,10 +98,6 @@ async function insertSaveButton() {
 
 function noFrecuentHandler(e) {
     setTimeout(async () => {
-        const clientElements = await Promise.all(
-            Object.values(noFrequentElementQueries).map(getDomElement)
-        );
-
         const clientValues = clientElements.map(elem => elem.value);
 
         if (
@@ -166,13 +183,11 @@ async function noFrecuentAutocomplete(e) {
                 elem.rfc.startsWith(currentValue)
             );
 
+            filtered.forEach(option => {});
+
             filtered.forEach(e => console.log(e));
         });
     }
 }
 
 noFrecuentSave();
-
-// chrome.runtime.sendMessage({action : 'getClients'}, (response)=>{
-//     console.log(response);
-// });

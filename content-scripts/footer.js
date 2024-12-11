@@ -1,17 +1,20 @@
 function getDomElement(querySelector) {
     return new Promise((resolve, reject) => {
-        const chekElementExist = () => {
+        const checkElementExist = () => {
             const element = document.querySelector(querySelector);
-            if (!!element) {
+            if (element) {
                 resolve(element);
             } else {
-                setTimeout(chekElementExist, 500);
+                setTimeout(checkElementExist, 500);
             }
         };
-        chekElementExist();
+        checkElementExist();
 
         setTimeout(() => {
-            reject(new Error('No se pudieron encontrar los elementos'));
+            const element = document.querySelector(querySelector);
+            if (!element) {
+                reject(new Error('No se pudieron encontrar los elementos'));
+            }
         }, 1000 * 60);
     });
 }
