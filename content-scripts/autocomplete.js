@@ -1,4 +1,4 @@
-function getDomElement(querySelector) {
+const getDomElement = querySelector => {
     return new Promise((resolve, reject) => {
         const checkElementExist = () => {
             const element = document.querySelector(querySelector);
@@ -17,7 +17,7 @@ function getDomElement(querySelector) {
             }
         }, 1000 * 60);
     });
-}
+};
 
 const favorites = []; // Aqui se guardaran los datos completos de clientes frecuentes
 

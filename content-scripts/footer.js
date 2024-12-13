@@ -1,7 +1,7 @@
-function getDomElement(querySelector) {
+function getDomElement(query) {
     return new Promise((resolve, reject) => {
         const checkElementExist = () => {
-            const element = document.querySelector(querySelector);
+            const element = document.querySelector(query);
             if (element) {
                 resolve(element);
             } else {
@@ -11,7 +11,7 @@ function getDomElement(querySelector) {
         checkElementExist();
 
         setTimeout(() => {
-            const element = document.querySelector(querySelector);
+            const element = document.querySelector(query);
             if (!element) {
                 reject(new Error('No se pudieron encontrar los elementos'));
             }

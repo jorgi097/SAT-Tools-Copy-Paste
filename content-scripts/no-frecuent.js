@@ -1,7 +1,32 @@
-function getDomElement(querySelector) {
+const print = (...value) => console.log(...value);
+
+const noFrequentElementQueries = {
+    rfc: '#\\31 35textbox59',
+    razonSocial: '#\\31 35textbox60',
+    cp: '#\\31 35textbox61',
+    regimenFiscal: '#\\31 35textboxautocomplete62',
+};
+
+const usoFacturaFisicaQuery = '#\\31 35textboxautocomplete72';
+const usoFacturaMoralQuery = '#\\31 35textboxautocomplete71';
+const myRfcQuery = '.detalleUsuario span';
+const clientQuery = '#\\31 35textboxautocomplete55';
+
+const noFrecuentElementIds = {
+    rfc: '135textbox59',
+    razonSocial: '135textbox60',
+    cp: '135textbox61',
+    regimenFiscal: '135textboxautocomplete62',
+    usoFacturaFisica: '135textboxautocomplete72',
+    usoFacturaMoral: '135textboxautocomplete71',
+};
+
+//------------------------------------------------------------------------------------------------------------------------
+
+function getDomElement(query) {
     return new Promise((resolve, reject) => {
         const checkElementExist = () => {
-            const element = document.querySelector(querySelector);
+            const element = document.querySelector(query);
             if (element) {
                 resolve(element);
             } else {
@@ -11,7 +36,7 @@ function getDomElement(querySelector) {
         checkElementExist();
 
         setTimeout(() => {
-            const element = document.querySelector(querySelector);
+            const element = document.querySelector(query);
             if (!element) {
                 reject(new Error('No se pudieron encontrar los elementos'));
             }
@@ -19,50 +44,23 @@ function getDomElement(querySelector) {
     });
 }
 
-const noFrecuentElementIds = {
-    rfc: '135textbox59',
-    razonSocial: '135textbox60',
-    cp: '135textbox61',
-    regimenFiscal: '135textboxautocomplete62',
-    usoFactura: '135textboxautocomplete72',
+const isMoral = rfc => {
+    const moralRegex =
+        /^[a-zñ&]{3}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[a-z0-9]{2}[0-9a]$/i;
+    return moralRegex.test(rfc);
 };
 
-const moralRegex =
-    /^[a-zñ&]{3}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[a-z0-9]{2}[0-9a]$/i;
-const fisicaRegex =
-    /^[a-zñ&]{4}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[a-z0-9]{2}[0-9a]$/i;
-
-const isMoral = rfc => moralRegex.test(rfc);
-const isFisica = rfc => fisicaRegex.test(rfc);
-const clientQuery = '#\\31 35textboxautocomplete55';
-const myRfcQuery = '.detalleUsuario span';
-
-const noFrequentElementQueries = {
-    rfc: '#\\31 35textbox59',
-    razonSocial: '#\\31 35textbox60',
-    cp: '#\\31 35textbox61',
-    regimenFiscal: '#\\31 35textboxautocomplete62',
-    usoFacturaFisica: '#\\31 35textboxautocomplete72', // 71 NO FRECUENTE: MORAL Y 72 NO FRECUENTE: FISICA
-    usoFacturaMoral: '#\\31 35textboxautocomplete71', // 71 NO FRECUENTE: MORAL Y 72 NO FRECUENTE: FISICA
+const isFisica = rfc => {
+    const fisicaRegex =
+        /^[a-zñ&]{4}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[a-z0-9]{2}[0-9a]$/i;
+    return fisicaRegex.test(rfc);
 };
 
-const getNoFrecuentElements = async () => {
-    const clientElements = await Promise.all(
-        Object.values(noFrequentElementQueries).map(getDomElement)
-    );
-    return clientElements;
-};
+function hasError(element) {
+    return element.classList.contains('alert');
+}
 
-clientElements = getNoFrecuentElements();
-
-const [
-    rfcNoFrecuent,
-    razonSocialNoFrecuent,
-    cpNoFrecuent,
-    regimenFiscalNoFrecuent,
-    usoFacturaFisicaNoFrecuent,
-    usoFacturaMoralNoFrecuent,
-] = clientElements;
+//------------------------------------------------------------------------------------------------------------------------
 
 class noFrecuentClient {
     constructor(rfc, razonSocial, cp, regimenFiscal, usoFactura) {
@@ -80,12 +78,11 @@ class noFrecuentClient {
 }
 
 let currentClient = new noFrecuentClient();
+let lastSavedClient = new noFrecuentClient();
 
-function hasError(element) {
-    return element.classList.contains('alert');
-}
+//------------------------------------------------------------------------------------------------------------------------
 
-async function insertSaveButton() {
+const insertSaveButton = async () => {
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Guardar Cliente';
     saveButton.classList.add('saveButton', 'hide');
@@ -94,11 +91,68 @@ async function insertSaveButton() {
         '#A135row7 > div.panel-body > div:nth-child(6)'
     );
     saveButtonColumn.appendChild(saveButton);
-}
+};
 
-function noFrecuentHandler(e) {
+const saveButtonHandler = async e => {
+    // Guarda o Actualiza los datos en el Storage por cada Usuario
+    e.preventDefault();
+    if (
+        Object.values(currentClient).every(
+            value => value !== null && value !== undefined && value !== ''
+        )
+    ) {
+        const myRfcElement = await getDomElement(myRfcQuery);
+        const myRfcText = myRfcElement.textContent;
+        const myRfc = myRfcText.match(/^[^\s|]+/)[0];
+
+        chrome.storage.local.get(myRfc, result => {
+            // Valida si existia previamente el cliente
+            const noFrecuent = result[myRfc] || [];
+
+            const index = noFrecuent.findIndex(
+                client => client.rfc === currentClient.rfc
+            );
+
+            if (index !== -1) {
+                // Si el cliente ya existe
+                noFrecuent[index] = currentClient;
+            } else {
+                // Si no existe
+                noFrecuent.push(currentClient);
+            }
+
+            chrome.storage.local.set({ [myRfc]: noFrecuent });
+
+            lastSavedClient = { ...currentClient };
+            
+            e.target.classList.add('hide');
+        });
+
+        alert('Saved');
+    }
+};
+
+const verifyNoFrecuent = () => {
+    // Muestra el boton guardar si los datos estan completos y sin errores
     setTimeout(async () => {
+        const rfcInput = await getDomElement(noFrequentElementQueries.rfc);
+        const rfcCliente = rfcInput.value;
+
+        let noFrequentElements = { ...noFrequentElementQueries };
+
+        if (!hasError(rfcInput) && rfcCliente.length === 12)
+            noFrequentElements.usoFactura = usoFacturaMoralQuery;
+        else if (!hasError(rfcInput) && rfcCliente.length === 13)
+            noFrequentElements.usoFactura = usoFacturaFisicaQuery;
+
+        const clientElements = await Promise.all(
+            Object.values(noFrequentElements).map(getDomElement)
+        );
+
         const clientValues = clientElements.map(elem => elem.value);
+
+        print('verifyNoFrecuent clientElements: ', clientElements);
+        print('verifyNoFrecuent clientVAlues: ', clientValues);
 
         if (
             clientValues.every(
@@ -108,73 +162,60 @@ function noFrecuentHandler(e) {
         ) {
             currentClient = new noFrecuentClient(...clientValues);
 
-            const insertedSaveButton = await getDomElement('#saveButton');
+            if (
+                Object.keys(currentClient).some(
+                    key => currentClient[key] !== lastSavedClient[key]
+                )
+            ) {
+                const insertedSaveButton = await getDomElement('#saveButton');
 
-            insertedSaveButton.classList.remove('hide');
-            insertedSaveButton.addEventListener('click', async e => {
-                e.preventDefault();
-                const myRfcElement = await getDomElement(myRfcQuery);
-                const myRfcText = myRfcElement.textContent;
-                const myRfc = myRfcText.match(/^[^\s|]+/)[0];
-                chrome.storage.local.get(myRfc, result => {
-                    const noFrecuent = result[myRfc] || [];
+                insertedSaveButton.classList.remove('hide');
+                insertedSaveButton.addEventListener('click', saveButtonHandler);
 
-                    // Buscamos el índice del cliente actual en el array.
-                    const index = noFrecuent.findIndex(
-                        client => client.rfc === currentClient.rfc
-                    );
-
-                    if (index !== -1) {
-                        // Si el cliente ya existe, actualizamos su información.
-                        noFrecuent[index] = currentClient;
-                    } else {
-                        // Si no existe, lo añadimos al array.
-                        noFrecuent.push(currentClient);
-                    }
-
-                    chrome.storage.local.set({ [myRfc]: noFrecuent });
-                    insertedSaveButton.classList.add('hide');
-                });
-
-                alert('saved');
-            });
-
-            let print = Object.values(clientValues).toString();
-            console.log(`Completo: ${print}`);
+                let print = Object.values(clientValues).toString();
+                console.log(`Completo: ${print}`);
+            }
         } else {
             currentClient = new noFrecuentClient();
         }
     }, 1200);
-}
+};
 
-async function noFrecuentSave() {
-    const client = await getDomElement(clientQuery);
-    client.addEventListener('blur', async e => {
-        const currentValue = e.target.value;
-        const clientVariables = await Promise.all(
-            Object.values(noFrequentElementQueries).map(getDomElement)
+const noFrecuentSave = e => {
+    setTimeout(async () => {
+        // Espera aque se quite la clase 'alert' (Que marca el error)
+        const rfcInput = e.target;
+        const rfcCliente = e.target.value;
+
+        print(`noFrecuentSave rfcInput: `, rfcInput);
+        print(`noFrecuentSave rfcValue: `, rfcCliente);
+
+        let noFrequentElements = { ...noFrequentElementQueries };
+
+        if (!hasError(rfcInput) && rfcCliente.length === 12)
+            noFrequentElements.usoFactura = usoFacturaMoralQuery;
+        else if (!hasError(rfcInput) && rfcCliente.length === 13)
+            noFrequentElements.usoFactura = usoFacturaFisicaQuery;
+
+        const clientElements = await Promise.all(
+            Object.values(noFrequentElements).map(getDomElement)
         );
 
-        if (currentValue === 'Otro') {
-            if (document.querySelector('#saveButton') === null)
-                insertSaveButton();
-            clientVariables.forEach(element => {
-                element.addEventListener('blur', noFrecuentHandler);
-                element.addEventListener('input', noFrecuentAutocomplete);
-            });
-        } else if (currentValue !== 'Otro') {
-            clientVariables.forEach(element => {
-                element.removeEventListener('blur', noFrecuentHandler);
-                element.removeEventListener('input', noFrecuentAutocomplete);
-            });
-        }
-    });
-}
+        print(`noFrecuentSave clientElements: `, clientElements);
 
-async function noFrecuentAutocomplete(e) {
+        // COMO EVITO QUE SE DUPLIQUEN LISTENERS
+        clientElements.forEach(elem => {
+            elem.addEventListener('blur', verifyNoFrecuent);
+            print(`noFrecuentSave Events added`);
+        });
+    }, 1000);
+};
+
+const noFrecuentAutocomplete = async e => {
     const myRfcElement = await getDomElement(myRfcQuery);
     const myRfcText = myRfcElement.textContent;
     const myRfc = myRfcText.match(/^[^\s|]+/)[0];
+
     if (e.target.id === noFrecuentElementIds.rfc) {
         const currentValue = e.target.value.toUpperCase();
         chrome.storage.local.get(myRfc, result => {
@@ -188,6 +229,35 @@ async function noFrecuentAutocomplete(e) {
             filtered.forEach(e => console.log(e));
         });
     }
-}
+};
 
-noFrecuentSave();
+//------------------------------------------------------------------------------------------------------------------------
+
+const noFrecuentRegisterListener = async () => {
+    const client = await getDomElement(clientQuery);
+
+    client.addEventListener('blur', async e => {
+        const currentValue = e.target.value;
+
+        const rfcInput = await getDomElement(noFrequentElementQueries.rfc);
+
+        if (currentValue === 'Otro') {
+            if (document.querySelector('#saveButton') === null)
+                insertSaveButton();
+            try {
+                rfcInput.addEventListener('blur', noFrecuentSave);
+            } catch (error) {
+                console.error('Error en listener', error);
+            }
+
+            rfcInput.addEventListener('input', noFrecuentAutocomplete);
+        } else if (currentValue !== 'Otro') {
+            rfcInput.removeEventListener('blur', noFrecuentSave);
+            rfcInput.removeEventListener('input', noFrecuentAutocomplete);
+            if (!document.querySelector('#saveButton') === null)
+                document.querySelector('#saveButton').classList.add('hide');
+        }
+    });
+};
+
+noFrecuentRegisterListener();
