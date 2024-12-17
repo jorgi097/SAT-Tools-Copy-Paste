@@ -1,18 +1,17 @@
 const print = (...value) => console.log(...value);
 
-const noFrequentElementQueries = {
+const noFrequentElementsQueries = {
     rfc: '#\\31 35textbox59',
     razonSocial: '#\\31 35textbox60',
     cp: '#\\31 35textbox61',
     regimenFiscal: '#\\31 35textboxautocomplete62',
+    usoFacturaFisica: '#\\31 35textboxautocomplete72',
+    usoFacturaMoral: '#\\31 35textboxautocomplete71',
+    noFrecuentClient: '#\\31 35textboxautocomplete55',
+    myRfc: '.detalleUsuario span',
 };
 
-const usoFacturaFisicaQuery = '#\\31 35textboxautocomplete72';
-const usoFacturaMoralQuery = '#\\31 35textboxautocomplete71';
-const myRfcQuery = '.detalleUsuario span';
-const clientQuery = '#\\31 35textboxautocomplete55';
-
-const noFrecuentElementIds = {
+const noFrequentElementsIds = {
     rfc: '135textbox59',
     razonSocial: '135textbox60',
     cp: '135textbox61',
@@ -20,6 +19,30 @@ const noFrecuentElementIds = {
     usoFacturaFisica: '135textboxautocomplete72',
     usoFacturaMoral: '135textboxautocomplete71',
 };
+
+const noFrequentElements = {};
+
+const checkElementExists = setInterval(() => {
+    Object.values(noFrequentElementsQueries).forEach((query, index) => {
+        try {
+            [
+                noFrequentElements[
+                    Object.keys(noFrequentElementsQueries)[index]
+                ],
+            ] = document.querySelector(query);
+            
+        } catch (error) {}
+        console.log('keys al momento: ',Object.keys(noFrequentElements));
+        if (
+            Object.values(noFrequentElements).every(
+                elem => elem !== null && elem !== undefined
+            )
+        ) {
+           
+            // clearInterval(checkElementExists);
+        }
+    });
+}, 2000);
 
 //------------------------------------------------------------------------------------------------------------------------
 
@@ -44,20 +67,12 @@ function getDomElement(query) {
     });
 }
 
-const isMoral = rfc => {
-    const moralRegex =
-        /^[a-zñ&]{3}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[a-z0-9]{2}[0-9a]$/i;
-    return moralRegex.test(rfc);
-};
-
-const isFisica = rfc => {
-    const fisicaRegex =
-        /^[a-zñ&]{4}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[a-z0-9]{2}[0-9a]$/i;
-    return fisicaRegex.test(rfc);
-};
-
 function hasError(element) {
     return element.classList.contains('alert');
+}
+
+function isEmpty(array) {
+    return array.length === 0;
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -78,7 +93,6 @@ class noFrecuentClient {
 }
 
 let currentClient = new noFrecuentClient();
-let lastSavedClient = new noFrecuentClient();
 
 //------------------------------------------------------------------------------------------------------------------------
 
@@ -123,8 +137,6 @@ const saveButtonHandler = async e => {
 
             chrome.storage.local.set({ [myRfc]: noFrecuent });
 
-            lastSavedClient = { ...currentClient };
-            
             e.target.classList.add('hide');
         });
 
@@ -151,9 +163,6 @@ const verifyNoFrecuent = () => {
 
         const clientValues = clientElements.map(elem => elem.value);
 
-        print('verifyNoFrecuent clientElements: ', clientElements);
-        print('verifyNoFrecuent clientVAlues: ', clientValues);
-
         if (
             clientValues.every(
                 val => val !== null && val !== undefined && val !== ''
@@ -164,7 +173,7 @@ const verifyNoFrecuent = () => {
 
             if (
                 Object.keys(currentClient).some(
-                    key => currentClient[key] !== lastSavedClient[key]
+                    key => currentClient[key] !== lastSavedClient[key] //VERIFICAR DESDE LOCALSTORAGE SI ES IGUAL A UNO QUE YA EXISTE
                 )
             ) {
                 const insertedSaveButton = await getDomElement('#saveButton');
@@ -172,8 +181,8 @@ const verifyNoFrecuent = () => {
                 insertedSaveButton.classList.remove('hide');
                 insertedSaveButton.addEventListener('click', saveButtonHandler);
 
-                let print = Object.values(clientValues).toString();
-                console.log(`Completo: ${print}`);
+                let printing = Object.values(clientValues).toString();
+                print(`Completo: ${printing}`);
             }
         } else {
             currentClient = new noFrecuentClient();
@@ -187,9 +196,6 @@ const noFrecuentSave = e => {
         const rfcInput = e.target;
         const rfcCliente = e.target.value;
 
-        print(`noFrecuentSave rfcInput: `, rfcInput);
-        print(`noFrecuentSave rfcValue: `, rfcCliente);
-
         let noFrequentElements = { ...noFrequentElementQueries };
 
         if (!hasError(rfcInput) && rfcCliente.length === 12)
@@ -201,12 +207,9 @@ const noFrecuentSave = e => {
             Object.values(noFrequentElements).map(getDomElement)
         );
 
-        print(`noFrecuentSave clientElements: `, clientElements);
-
         // COMO EVITO QUE SE DUPLIQUEN LISTENERS
         clientElements.forEach(elem => {
             elem.addEventListener('blur', verifyNoFrecuent);
-            print(`noFrecuentSave Events added`);
         });
     }, 1000);
 };
@@ -216,19 +219,78 @@ const noFrecuentAutocomplete = async e => {
     const myRfcText = myRfcElement.textContent;
     const myRfc = myRfcText.match(/^[^\s|]+/)[0];
 
-    if (e.target.id === noFrecuentElementIds.rfc) {
-        const currentValue = e.target.value.toUpperCase();
-        chrome.storage.local.get(myRfc, result => {
-            const favorites = result[myRfc] || [];
-            let filtered = favorites.filter(elem =>
-                elem.rfc.startsWith(currentValue)
+    const currentValue = e.target.value.toUpperCase();
+
+    chrome.storage.local.get(myRfc, result => {
+        const favorites = result[myRfc] || [];
+        if (!isEmpty(favorites)) {
+            let filtered = favorites.filter(
+                elem => currentValue !== '' && elem.rfc.startsWith(currentValue)
             );
 
-            filtered.forEach(option => {});
+            const rfcList = document.querySelector('#rfcList');
+            rfcList.innerHTML = '';
+            if (filtered.length <= 0) rfcList.classList.add('hide');
 
-            filtered.forEach(e => console.log(e));
-        });
-    }
+            const inputRfc = document.querySelector(
+                noFrequentElementQueries.rfc
+            );
+            const inputCp = document.querySelector(noFrequentElementQueries.cp);
+            const inputRazonSocial = document.querySelector(
+                noFrequentElementQueries.razonSocial
+            );
+            const inputRegimen = document.querySelector(
+                noFrequentElementQueries.regimenFiscal
+            );
+
+            if (filtered.length > 0) {
+                rfcList.classList.remove('hide');
+                filtered.forEach(client => {
+                    const option = document.createElement('div');
+                    option.classList.add('opcionRfc');
+                    option.textContent = client.rfc;
+
+                    // Debugging: Log when creating option
+                    console.log('Creating option for:', client.rfc);
+
+                    rfcList.appendChild(option);
+
+                    // Use event delegation or ensure clean event binding
+                    option.addEventListener('click', function (clickEvent) {
+                        // Prevent any default behavior
+                        clickEvent.preventDefault();
+                        clickEvent.stopPropagation();
+
+                        // Debugging: Log when clicking
+                        console.log('Clicked option:', this.textContent);
+
+                        const selected = this.textContent;
+                        print(selected);
+                        const selectedClient = filtered.find(
+                            elem => elem.rfc === selected
+                        );
+
+                        if (selectedClient) {
+                            print(selectedClient);
+                            inputRfc.value = selectedClient.rfc;
+                            inputRfc.dispatchEvent(new Event('blur'));
+                            inputRazonSocial.value = selectedClient.razonSocial;
+                            inputRazonSocial.dispatchEvent(new Event('blur'));
+                            inputCp.value = selectedClient.cp;
+                            inputCp.dispatchEvent(new Event('blur'));
+
+                            rfcList.classList.add('hide'); // Hide the list after selection
+                        } else {
+                            console.error('No client found for RFC:', selected);
+                        }
+                    });
+                });
+
+                // Additional debugging
+                console.log('Total filtered options:', filtered.length);
+            }
+        }
+    });
 };
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -238,19 +300,41 @@ const noFrecuentRegisterListener = async () => {
 
     client.addEventListener('blur', async e => {
         const currentValue = e.target.value;
-
+        console.log(lime);
         const rfcInput = await getDomElement(noFrequentElementQueries.rfc);
 
         if (currentValue === 'Otro') {
             if (document.querySelector('#saveButton') === null)
                 insertSaveButton();
-            try {
-                rfcInput.addEventListener('blur', noFrecuentSave);
-            } catch (error) {
-                console.error('Error en listener', error);
+            if (document.querySelector('#rfcList') === null) {
+                const rfcList = document.createElement('div');
+                rfcList.id = 'rfcList';
+                rfcList.classList.add('rfcListContainer', 'hide');
+
+                const optionsSizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const computedWidth = window.getComputedStyle(
+                            entry.target
+                        ).width;
+                        rfcList.style.width = computedWidth;
+                    }
+                });
+
+                optionsSizeObserver.observe(rfcInput);
+                rfcInput.insertAdjacentElement('afterend', rfcList);
             }
 
+            rfcInput.addEventListener('blur', noFrecuentSave);
             rfcInput.addEventListener('input', noFrecuentAutocomplete);
+            rfcInput.addEventListener('blur', e =>
+                rfcList.classList.add('hide')
+            );
+            // rfcInput.addEventListener('focus', e => {
+            //     if (e.target.value !== '') {
+            //         rfcList.classList.remove('hide');
+            //         rfcInput.dispatchEvent(new Event('input'));
+            //     }
+            // });
         } else if (currentValue !== 'Otro') {
             rfcInput.removeEventListener('blur', noFrecuentSave);
             rfcInput.removeEventListener('input', noFrecuentAutocomplete);
