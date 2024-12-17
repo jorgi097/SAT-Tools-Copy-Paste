@@ -19,13 +19,15 @@ function getDomElement(query) {
     });
 }
 
-const useless = { space: 'body > div:nth-child(159)', footer: 'footer' };
+const useless = {
+    space: 'body > div:nth-child(159)',
+    footer: 'footer',
+    privacidad: 'body > div:nth-child(10) > div:nth-child(6)',
+};
 
 async function hideElements() {
-    const space = await getDomElement(useless.space);
-    const footer = await getDomElement(useless.footer);
-    space.style.display = 'none';
-    footer.style.display = 'none';
+    const removeUseles = await Promise.all(Object.values(useless).map(getDomElement));
+    removeUseles.forEach(elem=>elem.style.display = 'none')
 }
 
 hideElements();
