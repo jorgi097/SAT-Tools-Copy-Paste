@@ -19,24 +19,22 @@ function getDomElement(query) {
     });
 }
 
-const useless = {
+const uselessQueries = {
     space: 'body > div:nth-child(159)',
     footer: 'footer',
     privacidad: 'body > div:nth-child(10) > div:nth-child(6)',
 };
 
 async function hideElements() {
-    const removeUseles = await Promise.all(Object.values(useless).map(getDomElement));
-    removeUseles.forEach(elem=>elem.style.display = 'none')
+    const removeUseles = await Promise.all(
+        Object.values(uselessQueries).map(getDomElement)
+    );
+    removeUseles.forEach(elem => (elem.style.display = 'none'));
 }
 
 hideElements();
 
-function reloadSite() {
+setTimeout(() => {
     console.log('reloaded');
     location.reload();
-}
-setTimeout(
-    reloadSite,
-    (Math.floor(Math.random() * (12 - 9 + 1)) + 9) * 1000 * 60
-);
+}, (Math.floor(Math.random() * (12 - 9 + 1)) + 9) * 1000 * 60);

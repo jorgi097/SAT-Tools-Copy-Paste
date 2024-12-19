@@ -29,7 +29,8 @@
  ],
     "host_permissions": [
         "https://portal.facturaelectronica.sat.gob.mx/*",
-        "https://*.clouda.sat.gob.mx/*"
+        "https://*.clouda.sat.gob.mx/*",
+        "https://wwwmat.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal."
     ],
     "icons": {
         "48": "src/Logo 48px.png",
