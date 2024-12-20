@@ -36,23 +36,26 @@ function frequentAutocomplete() {
         const currentValue = e.target.value;
         const cp = frequentElements.cp;
         const regimenFiscal = frequentElements.regimenFiscal;
+        const regimenRegex = /[^-0-9]+$/;
+
         if (currentValue !== '' && !excluirClient.includes(currentValue)) {
             const matchedFavorite = favorites.find(
                 favorite => favorite.RFCReceptor === currentValue
             );
 
-            if (matchedFavorite !== undefined) {
+            if (matchedFavorite) {
                 console.log(matchedFavorite);
-                cp.value = matchedFavorite.CodigoPostal;
-                cp.dispatchEvent(new Event('blur'));
+                if (matchedFavorite.CodigoPostal !== '') {
+                    cp.value = matchedFavorite.CodigoPostal;
+                    cp.dispatchEvent(new Event('blur'));
+                }
 
-                setTimeout(() => {
-                    let cleanWord = /[^-0-9]+$/;
-                    let cleanRegimen =
+                if (matchedFavorite.RegimenFiscalDescripcion !== '') {
+                    const cleanRegimen =
                         matchedFavorite.RegimenFiscalDescripcion.match(
-                            cleanWord
+                            regimenRegex
                         )[0].trim();
-                    
+
                     regimenFiscal.value = cleanRegimen;
                     regimenFiscal.dispatchEvent(new Event('focus'));
                     setTimeout(() => {
@@ -62,7 +65,7 @@ function frequentAutocomplete() {
                                 new Event('click', { bubbles: true })
                             );
                     }, 1000);
-                }, 1000);
+                }
             }
         } else {
             cp.value = '';
