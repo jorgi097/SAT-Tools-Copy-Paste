@@ -1,30 +1,34 @@
-function createCSVFromArray(array, fileName) {
-    if (!Array.isArray(array) || array.length === 0) {
-        throw new Error('Input should be a non-empty array of objects');
-    }
-
-    const headers = Object.keys(array[0]);
-    const csvRows = array.map(obj => headers.map(header => obj[header]).join(','));
-    const csvContent = [headers.join(','), ...csvRows].join('\n');
-
-    // Add BOM for UTF-8 encoding
-    const bom = '\uFEFF';
-    const blob = new Blob([bom + csvContent], { type: 'text/csv;charset=utf-8;' });
+const saveData = (data, filename) => {
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: 'application/json',
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = fileName;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-}
+};
 
-// Example usage:
-const data = [
-    { name: 'John', age: 30, city: 'New York' },
-    { name: 'Jane', age: 25, city: 'Los Angeles' },
-    { name: 'Mike', age: 35, city: 'Chicago' }
-];
+const backupButton = document.getElementById('backup-btn');
+const restoreButton = document.getElementById('restore-btn');
 
-createCSVFromArray(data, 'output.csv');
+
+backupButton.addEventListener('click', () => {
+    chrome.storage.local.get(null, data => {
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+            return;
+        }
+        if (Object.keys(data).length === 0) {
+            console.error('No hay datos para respaldar.');
+            return;
+        }
+        const fileName = `HerramientasSatBackup-${new Date()
+            .toISOString()
+            .replace(/[-:tT]*/g, '')}.json`;
+        saveData(data, fileName);
+    });
+});
