@@ -1,0 +1,51 @@
+{
+  "GACJ971003HU5": [
+    {
+      "cp": "45070",
+      "razonSocial": "GRECIA JAREMY DUEÑAS MANCILLA",
+      "regimenFiscal": "Personas Físicas con Actividades Empresariales y Profesionales",
+      "rfc": "DUMG98101717A",
+      "usoFactura": "Gastos en general."
+    },
+    {
+      "cp": "11550",
+      "razonSocial": "ASOCIACION DE EMPRENDEDORES DE MEXICO Y LATAM",
+      "regimenFiscal": "General de Ley Personas Morales",
+      "rfc": "AEM150120HA0",
+      "usoFactura": "Pagos"
+    }
+  ],
+  "GACP010806DLA": [
+    {
+      "cp": "45070",
+      "razonSocial": "GRECIA JAREMY DUEÑAS MANCILLA",
+      "regimenFiscal": "Personas Físicas con Actividades Empresariales y Profesionales",
+      "rfc": "DUMG98101717A",
+      "usoFactura": "Pagos"
+    },
+    {
+      "cp": "11550",
+      "razonSocial": "ASOCIACION DE EMPRENDEDORES DE MEXICO Y LATAM",
+      "regimenFiscal": "General de Ley Personas Morales",
+      "rfc": "AEM150120HA0",
+      "usoFactura": "Gastos en general."
+    }
+  ],
+  "HEAM9005232Y7": [
+    {
+      "cp": "45070",
+      "razonSocial": "GRECIA JAREMY DUEÑAS MANCILLA",
+      "regimenFiscal": "Sueldos y Salarios e Ingresos Asimilados a Salarios",
+      "rfc": "DUMG98101717A",
+      "usoFactura": "Pagos por servicios educativos (colegiaturas)."
+    },
+    {
+      "cp": "11550",
+      "razonSocial": "ASOCIACION DE EMPRENDEDORES DE MEXICO Y LATAM",
+      "regimenFiscal": "General de Ley Personas Morales",
+      "rfc": "AEM150120HA0",
+      "usoFactura": "Pagos por servicios educativos (colegiaturas)."
+    }
+  ],
+  "enabled": true
+}

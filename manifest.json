@@ -19,18 +19,24 @@
         "default_popup": "popup/popup.html"
     },
     "content_scripts": [
-   {
-     "matches": ["https://portal.facturaelectronica.sat.gob.mx/*"],
-     "css": ["content-scripts/nofrecuent.css"],   
-     "all_frames": true,
-     "run_at": "document_idle",
-     "world": "ISOLATED"
-   }
- ],
+        {
+            "matches": [
+                "https://portal.facturaelectronica.sat.gob.mx/*"
+            ],
+            "css": [
+                "content-scripts/nofrecuent.css"
+            ],
+            "all_frames": true,
+            "run_at": "document_idle",
+            "world": "ISOLATED",
+            "type": "module"
+        }
+    ],
     "host_permissions": [
         "https://portal.facturaelectronica.sat.gob.mx/*",
         "https://*.clouda.sat.gob.mx/*",
-        "https://wwwmat.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal."
+        "https://wwwmat.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal.",
+        "https://wwwmatnp.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal."
     ],
     "icons": {
         "48": "src/Logo 48px.png",

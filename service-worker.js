@@ -15,7 +15,9 @@ const scripts = [
         id: 'autocomplete-script',
         js: ['content-scripts/autocomplete.js'],
         persistAcrossSessions: true,
-        matches: ['https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura'],
+        matches: [
+            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura',
+        ],
         runAt: 'document_start',
         world: 'MAIN',
         allFrames: true,
@@ -24,7 +26,9 @@ const scripts = [
         id: 'no-frecuent-script',
         js: ['content-scripts/no-frecuent.js'],
         persistAcrossSessions: true,
-        matches: ['https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura'],
+        matches: [
+            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura',
+        ],
         runAt: 'document_idle',
         world: 'ISOLATED',
         allFrames: true,
@@ -33,7 +37,9 @@ const scripts = [
         id: 'footer-script',
         js: ['content-scripts/footer.js'],
         persistAcrossSessions: true,
-        matches: ['https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura'],
+        matches: [
+            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura',
+        ],
         runAt: 'document_idle',
         world: 'ISOLATED',
         allFrames: true,
@@ -42,7 +48,11 @@ const scripts = [
         id: 'constancia-script',
         js: ['content-scripts/constancia.js'],
         persistAcrossSessions: true,
-        matches: ['https://wwwmat.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal.'],
+        matches: [
+            'https://wwwmat.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal.',
+            'https://wwwmatnp.sat.gob.mx/operacion/53027/genera-tu-constancia-de-situacion-fiscal.',
+            
+        ],
         runAt: 'document_idle',
         world: 'ISOLATED',
         allFrames: true,
@@ -96,9 +106,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                             }
                         } else {
                             // Desregistrar el script
-                            const unregisterScripts = {ids: scripts.map(({ id }) => id)}
+                            const unregisterScripts = {
+                                ids: scripts.map(({ id }) => id),
+                            };
 
-                            chrome.scripting.unregisterContentScripts(unregisterScripts);
+                            chrome.scripting.unregisterContentScripts(
+                                unregisterScripts
+                            );
                         }
                     }
                 );

@@ -1,14 +1,14 @@
-window.onload = () => {
-    const constanciaInterval = setInterval(() => {
-        try {
-            const constanciaWrapper =
-                document.querySelector('#content > div.pwm');
-            const constanciaIframe = document.querySelector('#iframetoload');
-            if (constanciaWrapper && constanciaIframe) {
-                constanciaWrapper.style.maxWidth = '1300px';
-                constanciaIframe.style.width = '100%';
-                clearInterval(constanciaInterval);
-            }
-        } catch (error) {}
-    }, 500);
-};
+let constanciaWrapper;
+let constanciaIframe;
+
+const constanciaInterval = setInterval(() => {
+    try {
+        constanciaWrapper = document.querySelector('#content > div.pwm');
+        constanciaIframe = document.querySelector('#iframetoload');
+        if (constanciaWrapper && constanciaIframe) {
+            clearInterval(constanciaInterval);
+            constanciaWrapper.style.maxWidth = '1300px';
+            constanciaIframe.style.width = '100%';
+        }
+    } catch (error) {}
+}, 500);

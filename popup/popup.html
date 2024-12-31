@@ -4,71 +4,76 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Herramientas SAT (Copiar-Pegar)</title>
+
     <link rel="stylesheet" href="/popup/normalize.css" />
     <link rel="stylesheet" href="/lib/hint.css-2.7.0/hint.min.css" />
     <link rel="stylesheet" href="/popup/popup.css" />
+
     <script defer src="/popup/popup.js"></script>
     <script defer src="/popup/backup.js"></script>
 </head>
 
 <body>
-
-    <div class="title-container">
-        <div class="logo-container">
-            <img src="../src/Logo.svg" alt="Logo">
+    <div class="main">
+        <div class="title-container">
+            <div class="logo-container">
+                <img src="../src/Logo.svg" alt="Logo">
+            </div>
+            <div class="popup-title">
+                <h2 class=>HERRAMIENTAS SAT<br />(COPIAR-PEGAR)</h2>
+            </div>
         </div>
-        <div class="popup-title">
-            <h2 class=>HERRAMIENTAS SAT<br />(COPIAR-PEGAR)</h2>
+
+        <div class="popup-description">
+            <div class="popup-description_wraper">
+                <p><b>Copia y Pega</b> en los<br>Portales del SAT</p>
+            </div>
+        </div>
+
+        <div class="popup-option">
+            <button id="enabledButton" class="hint--top-right hint--rounded hint--info" aria-label="">
+                Loading...
+            </button>
+        </div>
+
+        <div class="popup-option" id="facturar">
+            <button class="normal-button hint--top-right hint--rounded hint--info"
+                aria-label="Abrir portal de facturación">
+                Ir a Facturar
+            </button>
+        </div>
+
+        <div class="popup-option flex-spacing" id="declarar">
+
+            <p class="popup-option_title">Ir a Declarar</p>
+
+            <button id="declarar-1" class="normal-button hint--top-right hint--rounded hint--info"
+                aria-label="Abrir el portal viejo">
+                Portal Viejo
+            </button>
+            <button id="declarar-2" class="normal-button hint--top-left hint--rounded hint--info"
+                aria-label="Abrir el portal nuevo">
+                Portal Nuevo
+            </button>
+        </div>
+
+        <div class="popup-option flex-spacing" id="backup">
+
+            <p class="popup-option_title">Respaldos</p>
+
+            <button id="backup-btn" class="normal-button hint--top-right hint--rounded hint--info"
+                aria-label="Crear archivo de respaldo">
+                Respaldar
+            </button>
+            <button id="restore-btn" class="normal-button hint--top-left hint--rounded hint--info"
+                aria-label="Restaurar desde archivo">
+                Restaurar
+            </button>
+            <input type="file" accept="application/json" id="restore-input" class="hidden">
         </div>
     </div>
-
-    <div class="popup-description">
-        <div class="popup-description_wraper">
-            <p><b>Copia y Pega</b> en los<br>Portales del SAT</p>
-        </div>
-    </div>
-
-    <div class="popup-option">
-        <button id="enabledButton" class="hint--top-right hint--rounded hint--info" aria-label="">
-            Loading...
-        </button>
-    </div>
-
-    <div class="popup-option" id="facturar">
-        <button class="normal-button hint--top-right hint--rounded hint--info" aria-label="Abrir portal de facturación">
-            Ir a Facturar
-        </button>
-    </div>
-
-    <div class="popup-option flex-spacing" id="declarar">
-
-        <p class="popup-option_title">Ir a Declarar</p>
-
-        <button id="declarar-1" class="normal-button hint--top-right hint--rounded hint--info"
-            aria-label="Abrir el portal viejo">
-            Portal Viejo
-        </button>
-        <button id="declarar-2" class="normal-button hint--top-left hint--rounded hint--info"
-            aria-label="Abrir el portal nuevo">
-            Portal Nuevo
-        </button>
-    </div>
-
-    <div class="popup-option flex-spacing" id="backup">
-
-        <p class="popup-option_title">Respaldos</p>
-
-        <button id="backup-btn" class="normal-button hint--top-right hint--rounded hint--info"
-            aria-label="Crear archivo de respaldo">
-            Respaldar
-        </button>
-        <button id="restore-btn" class="normal-button hint--top-left hint--rounded hint--info"
-            aria-label="Restaurar desde archivo">
-            Restaurar
-        </button>
-    </div>
-
 </body>
 
 </html>

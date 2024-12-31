@@ -1,3 +1,4 @@
+
 let enabledButton = document.querySelector('#enabledButton');
 let enabledState = null;
 
