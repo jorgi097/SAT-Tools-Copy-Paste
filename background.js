@@ -16,7 +16,7 @@ const scripts = [
         js: ['content-scripts/autocomplete.js'],
         persistAcrossSessions: true,
         matches: [
-            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura',
+            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura*',
         ],
         runAt: 'document_start',
         world: 'MAIN',
@@ -27,7 +27,7 @@ const scripts = [
         js: ['content-scripts/no-frecuent.js'],
         persistAcrossSessions: true,
         matches: [
-            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura',
+            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura*',
         ],
         runAt: 'document_idle',
         world: 'ISOLATED',
@@ -38,7 +38,7 @@ const scripts = [
         js: ['content-scripts/footer.js'],
         persistAcrossSessions: true,
         matches: [
-            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura',
+            'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura*',
         ],
         runAt: 'document_idle',
         world: 'ISOLATED',
@@ -56,14 +56,23 @@ const scripts = [
         allFrames: true,
     },
     {
-        id: 'testing-script',
-        js: ['content-scripts/testing.js'],
+        id: 'csf-autocomplete-script',
+        js: ['content-scripts/csf-autocomplete.js'],
         persistAcrossSessions: true,
         matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
         runAt: 'document_idle',
         world: 'ISOLATED',
         allFrames: true,
     },
+    // {
+    //     id: 'testing-script',
+    //     js: ['content-scripts/testing.js'],
+    //     persistAcrossSessions: true,
+    //     matches: ['https://portal.facturaelectronica.sat.gob.mx/*'],
+    //     runAt: 'document_idle',
+    //     world: 'ISOLATED',
+    //     allFrames: true,
+    // },
 ];
 
 chrome.runtime.onInstalled.addListener(details => {

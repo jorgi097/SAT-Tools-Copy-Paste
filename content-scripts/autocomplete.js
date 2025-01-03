@@ -64,7 +64,8 @@ function frequentAutocomplete() {
                             .dispatchEvent(
                                 new Event('click', { bubbles: true })
                             );
-                    }, 1000);
+                        document.activeElement.blur();
+                    }, 700);
                 }
             }
         } else {

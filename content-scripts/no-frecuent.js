@@ -58,7 +58,6 @@ const validRegimens = {
     626: 'Régimen Simplificado de Confianza',
 };
 
-
 const noFrequentElements = {};
 let filteredClients = [];
 let myRfc;
@@ -85,14 +84,15 @@ let currentClient = new noFrecuentClient();
 //-----------------------------------------------UTILS--------------------------------------------------------------------
 
 const hasError = element => element.classList.contains('alert');
-const isEmpty = array => array.length === 0;
+const isArrayEmpty = array => array.length === 0;
 const print = (...value) => console.log(...value);
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const isDifferent = (obj1, obj2) => {
+const areObjectsDifferente = (obj1, obj2) => {
     const keys1 = Object.keys(obj1);
     const keys2 = Object.keys(obj2);
 
-    // Si tienen diferente cantidad de claves, hay una diferencia
+    // Si tienen diferente cantidad de claves
     if (keys1.length !== keys2.length) {
         return true;
     }
@@ -100,25 +100,29 @@ const isDifferent = (obj1, obj2) => {
     // Comparar los valores de cada clave
     for (let key of keys1) {
         if (obj1[key] !== obj2[key]) {
-            return true; // Retorna true al encontrar la primera diferencia
+            return true; // Si hay al menos una diferencia
         }
     }
 
-    return false; // Retorna false si no hay diferencias
+    return false; // Si no hay diferencias
 };
 
 const insertSaveButton = () => {
+    // SE MUESTRA EL BOTON SI ME SALGO Y ENTRO ???
     if (!document.querySelector('#saveButton')) {
         const saveButton = document.createElement('button');
         saveButton.innerText = 'Guardar Cliente';
         saveButton.classList.add('saveButton', 'hide');
         saveButton.id = 'saveButton';
+        saveButton.addEventListener('click', saveButtonHandler);
         try {
             const saveButtonColumn = document.querySelector(
                 '#A135row7 > div.panel-body > div:nth-child(6)'
             );
             saveButtonColumn.appendChild(saveButton);
-        } catch (error) {}
+        } catch (error) {
+            print('No se pudo insertar el botón de guardar' + error);
+        }
     }
 };
 
@@ -143,15 +147,15 @@ const insertList = () => {
 
         rfcList.addEventListener('click', e => {
             e.preventDefault();
-            e.stopPropagation();
+            // e.stopPropagation();
             const rfcInput = noFrequentElements.rfc;
-            rfcInput.style.marginBottom = '5px';
-            rfcList.classList.add('hide');
+
             if (e.target.classList.contains('opcionRfc')) {
                 handleSelectClient(e);
             }
         });
 
+        //Para insertar oculto
         rfcList.classList.add('hide');
     }
 };
@@ -162,155 +166,93 @@ const saveButtonHandler = e => {
     // Guarda o Actualiza los datos en el Storage por cada Usuario
     e.preventDefault();
 
+    const saveButton = e.target;
+
+    const clientElements = {
+        rfc: noFrequentElements.rfc,
+        razonSocial: noFrequentElements.razonSocial,
+        cp: noFrequentElements.cp,
+        regimenFiscal: noFrequentElements.regimenFiscal,
+    };
+
+    clientElements.usoFactura =
+        clientElements.rfc.value.length === 12
+            ? noFrequentElements.usoFacturaMoral
+            : clientElements.rfc.value.length === 13
+            ? noFrequentElements.usoFacturaFisica
+            : null;
+
+    const clientValues = Object.values(clientElements).map(elem => elem.value);
+
     if (
-        Object.values(currentClient).every(
+        !clientValues.every(
             value => value !== null && value !== undefined && value !== ''
         )
     ) {
-        chrome.storage.local.get(myRfc, result => {
-            // Valida si existia previamente el cliente
-            const noFrecuent = result[myRfc] || [];
-
-            const index = noFrecuent.findIndex(
-                client => client.rfc === currentClient.rfc
-            );
-
-            if (index !== -1) {
-                // Si el cliente ya existe
-                noFrecuent[index] = currentClient;
-            } else {
-                // Si no existe
-                noFrecuent.push(currentClient);
-            }
-
-            chrome.storage.local.set({ [myRfc]: noFrecuent });
-
-            e.target.classList.add('hide');
-        });
-
-        alert('Saved');
+        print('No se puede guardar, faltan datos');
+        return;
     }
-};
 
-const handleVerifyNoFrecuent = () => {
-    print('ENTERED handleVerifyNoFrecuent');
+    if (
+        !(
+            clientElements.rfc.value.length >= 12 &&
+            clientElements.rfc.value.length <= 13
+        ) ||
+        hasError(clientElements.rfc)
+    ) {
+        print('No se puede guardar, RFC tiene un formato inválido');
+        return;
+    }
+    if (!clientElements.cp.value.length === 5 || hasError(clientElements.cp)) {
+        print('No se puede guardar, CP tiene un formato inválido');
+        return;
+    }
 
-    // Muestra el boton guardar si los datos estan completos y sin errores
-    setTimeout(() => {
-        const rfcInput = noFrequentElements.rfc;
-        const rfcCliente = rfcInput.value;
-        const insertedSaveButton = document.querySelector('#saveButton');
+    if (
+        !Object.values(validRegimens).includes(
+            clientElements.regimenFiscal.value
+        ) ||
+        hasError(clientElements.regimenFiscal)
+    ) {
+        print('No se puede guardar, Regimen Fiscal inválido');
+        return;
+    }
 
-        if (
-            (rfcCliente.length === 12 || rfcCliente.length === 13) &&
-            !hasError(rfcInput)
-        ) {
-            const clientElements = {
-                rfc: noFrequentElements.rfc,
-                razonSocial: noFrequentElements.razonSocial,
-                cp: noFrequentElements.cp,
-                regimenFiscal: noFrequentElements.regimenFiscal,
-            };
+    if (
+        !validUsoFactura.includes(clientElements.usoFactura.value) ||
+        hasError(clientElements.usoFactura)
+    ) {
+        print('No se puede guardar, Uso de Factura inválido');
+        return;
+    }
 
-            clientElements.usoFactura =
-                rfcCliente.length === 12
-                    ? noFrequentElements.usoFacturaMoral
-                    : noFrequentElements.usoFacturaFisica;
+    currentClient = new noFrecuentClient(...clientValues);
 
-            const clientValues = Object.values(clientElements).map(
-                elem => elem.value
-            );
+    chrome.storage.local.get(myRfc, result => {
+        // Valida si existia previamente el cliente
+        const noFrecuent = result[myRfc] || [];
 
-            if (
-                clientValues.every(
-                    val => val !== null && val !== undefined && val !== ''
-                ) &&
-                Object.values(clientElements).every(elem => !hasError(elem))
-            ) {
-                currentClient = new noFrecuentClient(...clientValues);
+        const index = noFrecuent.findIndex(
+            client => client.rfc === currentClient.rfc
+        );
 
-                chrome.storage.local.get(myRfc, result => {
-                    // Valida si existia previamente el cliente
-                    const noFrecuent = result[myRfc] || [];
-
-                    const clientIndex = noFrecuent.findIndex(
-                        client => client.rfc === currentClient.rfc
-                    );
-
-                    if (clientIndex !== -1) {
-                        if (
-                            isDifferent(currentClient, noFrecuent[clientIndex])
-                        ) {
-                            insertedSaveButton.classList.remove('hide');
-
-                            insertedSaveButton.removeEventListener(
-                                'click',
-                                saveButtonHandler
-                            );
-                            insertedSaveButton.addEventListener(
-                                'click',
-                                saveButtonHandler
-                            );
-                        }
-                    } else {
-                        const insertedSaveButton =
-                            document.querySelector('#saveButton');
-
-                        insertedSaveButton.classList.remove('hide');
-
-                        insertedSaveButton.removeEventListener(
-                            'click',
-                            saveButtonHandler
-                        );
-                        insertedSaveButton.addEventListener(
-                            'click',
-                            saveButtonHandler
-                        );
-                    }
-                });
-            } else {
-                currentClient = new noFrecuentClient();
-                insertedSaveButton.classList.add('hide');
-            }
+        if (index !== -1) {
+            // Si el cliente ya existe
+            noFrecuent[index] = currentClient;
+        } else {
+            // Si no existe
+            noFrecuent.push(currentClient);
         }
-    }, 1200);
-};
 
-const noFrecuentSave = e => {
-    print('ENTERED noFrecuentSave');
+        chrome.storage.local.set({ [myRfc]: noFrecuent });
+    });
 
-    setTimeout(() => {
-        // Espera aque se quite la clase 'alert' (Que marca el error)
-        const rfcInput = e.target;
-        const rfcCliente = e.target.value;
-
-        if (
-            (rfcCliente.length === 12 || rfcCliente.length === 13) &&
-            !hasError(rfcInput)
-        ) {
-            const clientElements = {
-                rfc: noFrequentElements.rfc,
-                razonSocial: noFrequentElements.razonSocial,
-                cp: noFrequentElements.cp,
-                regimenFiscal: noFrequentElements.regimenFiscal,
-            };
-
-            clientElements.usoFactura =
-                rfcCliente.length === 12
-                    ? noFrequentElements.usoFacturaMoral
-                    : noFrequentElements.usoFacturaFisica;
-
-            Object.values(clientElements).forEach(elem => {
-                elem.removeEventListener('blur', handleVerifyNoFrecuent);
-                elem.addEventListener('blur', handleVerifyNoFrecuent);
-            });
-        }
-    }, 1000);
+    alert('Cliente Guardado');
 };
 
 //-------------------------------------------AUTOCOMPLETE-----------------------------------------------------------------
 
-const handleSelectClient = e => {
+const handleSelectClient = async e => {
     const currentSelectedClient = e.target.textContent;
     print('ENTERED handleSelectClient');
 
@@ -339,15 +281,12 @@ const handleSelectClient = e => {
 
         inputRegimen.value = selectedClient.regimenFiscal;
         inputRegimen.dispatchEvent(new Event('focus'));
-        setTimeout(() => {
-            let regimenOption = document.querySelector('#ui-id-3 > li');
-            if (regimenOption) {
-                regimenOption.dispatchEvent(
-                    new Event('click', { bubbles: true })
-                );
-                inputRegimen.dispatchEvent(new Event('blur'));
-            }
-        }, 1000);
+        await sleep(400);
+        let regimenOption = document.querySelector('#ui-id-3 > li');
+        if (regimenOption) {
+            regimenOption.dispatchEvent(new Event('click', { bubbles: true }));
+            inputRegimen.dispatchEvent(new Event('blur'));
+        }
 
         const inputUsoFactura =
             inputRfc.value.length === 12
@@ -357,20 +296,17 @@ const handleSelectClient = e => {
         inputUsoFactura.value = selectedClient.usoFactura;
         inputUsoFactura.dispatchEvent(new Event('focus'));
 
-        setTimeout(() => {
-            const useOption =
-                inputRfc.value.length === 12
-                    ? document.querySelector('#ui-id-5 > li')
-                    : document.querySelector('#ui-id-6 > li');
+        await sleep(400);
+        const useOption =
+            inputRfc.value.length === 12
+                ? document.querySelector('#ui-id-5 > li')
+                : document.querySelector('#ui-id-6 > li');
 
-            if (useOption) {
-                useOption.dispatchEvent(new Event('click', { bubbles: true }));
-                inputUsoFactura.dispatchEvent(new Event('blur'));
-            }
-        }, 1000);
-        setTimeout(() => {
-            rfcList.classList.add('hide');
-        }, 1000);
+        if (useOption) {
+            useOption.dispatchEvent(new Event('click', { bubbles: true }));
+            inputUsoFactura.dispatchEvent(new Event('blur'));
+        }
+
     } else {
         console.error('No client found for RFC:', currentSelectedClient);
     }
@@ -378,12 +314,13 @@ const handleSelectClient = e => {
 
 const noFrecuentAutocomplete = e => {
     const currentValue = e.target.value.toUpperCase();
+
     print('ENTERED noFrecuentAutocomplete');
 
     chrome.storage.local.get(myRfc, result => {
         const savedData = result[myRfc] || [];
 
-        if (!isEmpty(savedData)) {
+        if (!isArrayEmpty(savedData)) {
             const rfcList = document.querySelector('#rfcList');
 
             rfcList.innerHTML = '';
@@ -392,12 +329,10 @@ const noFrecuentAutocomplete = e => {
                 elem => currentValue !== '' && elem.rfc.startsWith(currentValue)
             );
 
-            if (isEmpty(filtered)) rfcList.classList.add('hide');
-
-            if (!isEmpty(filtered)) {
+            if (!isArrayEmpty(filtered)) {
                 filteredClients = [...filtered]; //
 
-                rfcList.classList.remove('hide');
+                if (e.isTrusted) rfcList.classList.remove('hide');
 
                 filtered.forEach(client => {
                     const option = document.createElement('div');
@@ -423,19 +358,38 @@ const registerClientListener = () => {
             insertSaveButton();
             insertList();
 
-            rfcInput.removeEventListener('blur', noFrecuentSave);
-            rfcInput.addEventListener('blur', noFrecuentSave);
+            rfcInput.removeEventListener('blur', saveOrUpdate);
+            rfcInput.addEventListener('blur', saveOrUpdate);
+
             rfcInput.removeEventListener('input', noFrecuentAutocomplete);
             rfcInput.addEventListener('input', noFrecuentAutocomplete);
+
             rfcInput.addEventListener('focus', e => {
                 if (e.target.value !== '') e.target.style.marginBottom = '0';
+                document.querySelector('#rfcList').classList.remove('hide');
             });
-            rfcInput.addEventListener('blur', e => {
-                if (e.target.value === '') e.target.style.marginBottom = '5px';
+            // OCULTAR DESPLEGABLE ???
+            rfcInput.addEventListener('blur', async e => {
+                const saveButton = document.querySelector('#saveButton');
+                const list = document.querySelector('#rfcList');
+
+                await sleep(300);
+                list.classList.add('hide');
+                e.target.style.marginBottom = '5px';
+
+                if (
+                    e.target.value.length >= 12 &&
+                    e.target.value.length <= 13
+                ) {
+                    saveButton.classList.remove('hide');
+                } else {
+                    saveButton.classList.add('hide');
+                }
             });
         } else {
-            rfcInput.removeEventListener('blur', noFrecuentSave);
+            rfcInput.removeEventListener('blur', saveOrUpdate);
             rfcInput.removeEventListener('input', noFrecuentAutocomplete);
+
             if (document.querySelector('#saveButton') !== null)
                 document.querySelector('#saveButton').classList.add('hide');
         }
@@ -469,3 +423,24 @@ const checkElementExists = setInterval(() => {
         registerClientListener();
     }
 }, 3000);
+
+function saveOrUpdate(e) {
+    if (!(e.target.value.length === 12 || e.target.value.length === 13)) {
+        return;
+    }
+
+    const saveButton = document.getElementById('saveButton');
+
+    chrome.storage.local.get(myRfc, result => {
+        // Valida si existia previamente el cliente
+        const noFrecuent = result[myRfc] || [];
+
+        const clientFind = noFrecuent.find(
+            client => client.rfc === e.target.value
+        );
+
+        saveButton.textContent = clientFind
+            ? 'Actualizar Cliente'
+            : 'Guardar Cliente';
+    });
+}
