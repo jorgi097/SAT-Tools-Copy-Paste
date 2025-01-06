@@ -209,7 +209,7 @@ const saveButtonHandler = e => {
     }
 
     if (
-        !Object.values(validRegimens).includes(
+        !Object.values(validRegimens).includes( // ver que si este haciendo la verificacion como se supone en csfauto
             clientElements.regimenFiscal.value
         ) ||
         hasError(clientElements.regimenFiscal)
