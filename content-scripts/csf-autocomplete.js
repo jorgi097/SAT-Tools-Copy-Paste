@@ -7,8 +7,8 @@
     );
 })();
 
+// Recibe un archivo PDF de la constancia de situación fiscal y retorna rfc, razonSocial, cp, regimenes fiscles
 const extractDataFromCSF = async file => {
-    // Extrae la data de la constancia de situacion fiscal
     const loadingTask = pdfjsLib.getDocument(URL.createObjectURL(file));
     const pdf = await loadingTask.promise;
     let content = '';
@@ -42,7 +42,7 @@ const extractDataFromCSF = async file => {
               .filter(line => line.trim() && !line.includes('Página'))
         : ['No encontrado'];
 
-    let regimens = regimensExtracted.map(regimen => {
+    const regimens = regimensExtracted.map(regimen => {
         return (
             Object.values(validRegimens).find(validRegimen =>
                 regimen.includes(validRegimen)
@@ -54,9 +54,31 @@ const extractDataFromCSF = async file => {
 };
 
 const dropZone = document.querySelector('body');
+const dragZone = document.createElement('div');
+
+dragZone.classList.add('dragzone', 'hide');
+const dragZoneMargin = document.createElement('div');
+dragZone.appendChild(dragZoneMargin);
+const dragZoneText = document.createElement('p');
+dragZoneText.textContent = 'Suelta la Constancia de Situación Fiscal aquí';
+dragZoneMargin.appendChild(dragZoneText);
+
+dropZone.appendChild(dragZone);
 
 dropZone.addEventListener('dragover', event => {
     event.preventDefault();
+    if (dragZone.classList.contains('hide')) {
+        dragZone.classList.remove('hide');
+    }
+});
+
+dropZone.addEventListener('dragleave', event => {
+    if (
+        event.relatedTarget === null ||
+        !dropZone.contains(event.relatedTarget)
+    ) {
+        dragZone.classList.add('hide');
+    }
 });
 
 dropZone.addEventListener('drop', async event => {
@@ -69,7 +91,7 @@ dropZone.addEventListener('drop', async event => {
         return;
     }
 
-    dropZone.classList.remove('dragover');
+    dragZone.classList.add('hide');
 
     let extractedData = await extractDataFromCSF(file);
 
@@ -123,8 +145,12 @@ dropZone.addEventListener('drop', async event => {
                 ? noFrequentElements.usoFacturaMoral
                 : noFrequentElements.usoFacturaFisica;
 
+        console.log(document.activeElement);
         if (inputUsoFactura) {
-            inputUsoFactura.dispatchEvent(new Event('focus'));
+            inputUsoFactura.dispatchEvent(new Event('focus'), {
+                bubbles: false,
+            });
+            inputUsoFactura.focus();
         }
     }
 });

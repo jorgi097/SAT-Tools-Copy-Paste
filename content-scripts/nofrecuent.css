@@ -12,7 +12,8 @@
 }
 
 .rfcListContainer {
-    position: absolute; 
+    position: absolute;
+    z-index: 1001;
     overflow-x: hidden;
     overflow-y: auto;
     max-width: 316px;
@@ -20,8 +21,6 @@
     background-color: rgb(241, 241, 241);
     border: 0.8px solid rgb(204, 204, 204);
     border-radius: 0 0 5px 5px;
-    /* El Z-INDEX es lo que permitio seleccionar en caso de cambiar de cliente*/
-    z-index: 1001;
 }
 
 .opcionRfc {
@@ -43,3 +42,32 @@
     margin-bottom: 0;
 }
 
+.dragzone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 20000;
+    top: 0;
+    left: 0;
+    opacity: 0.85;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+
+.dragzone div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    background-color: #fff;
+    border: 3px dashed #000;
+}
+
+.dragzone p{
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
