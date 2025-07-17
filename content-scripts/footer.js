@@ -20,8 +20,8 @@ function getDomElement(query) {
 }
 
 const uselessQueries = {
-    space: 'body > div:nth-child(159)',
-    footer: 'footer',
+    footer: '.main-footer',
+    space: 'body > div:nth-child(162)',
     privacidad: 'body > div:nth-child(10) > div:nth-child(6)',
 };
 

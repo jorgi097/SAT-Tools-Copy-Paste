@@ -65,12 +65,12 @@ let myRfc;
 //------------------------------------------------------------------------------------------------------------------------
 
 class noFrecuentClient {
-    constructor(rfc, razonSocial, cp, regimenFiscal, usoFactura) {
+    constructor(rfc, razonSocial, cp, regimenFiscal) {
         this.rfc = rfc;
         this.razonSocial = razonSocial;
         this.cp = cp;
         this.regimenFiscal = regimenFiscal;
-        this.usoFactura = usoFactura;
+        // this.usoFactura = usoFactura;
     }
     rfc;
     razonSocial;
@@ -175,12 +175,12 @@ const saveButtonHandler = e => {
         regimenFiscal: noFrequentElements.regimenFiscal,
     };
 
-    clientElements.usoFactura =
-        clientElements.rfc.value.length === 12
-            ? noFrequentElements.usoFacturaMoral
-            : clientElements.rfc.value.length === 13
-            ? noFrequentElements.usoFacturaFisica
-            : null;
+    // clientElements.usoFactura =
+    //     clientElements.rfc.value.length === 12
+    //         ? noFrequentElements.usoFacturaMoral
+    //         : clientElements.rfc.value.length === 13
+    //         ? noFrequentElements.usoFacturaFisica
+    //         : null;
 
     const clientValues = Object.values(clientElements).map(elem => elem.value);
 
@@ -218,13 +218,13 @@ const saveButtonHandler = e => {
         return;
     }
 
-    if (
-        !validUsoFactura.includes(clientElements.usoFactura.value) ||
-        hasError(clientElements.usoFactura)
-    ) {
-        print('No se puede guardar, Uso de Factura inválido');
-        return;
-    }
+    // if (
+    //     !validUsoFactura.includes(clientElements.usoFactura.value) ||
+    //     hasError(clientElements.usoFactura)
+    // ) {
+    //     print('No se puede guardar, Uso de Factura inválido');
+    //     return;
+    // }
 
     currentClient = new noFrecuentClient(...clientValues);
 
@@ -288,24 +288,24 @@ const handleSelectClient = async e => {
             inputRegimen.dispatchEvent(new Event('blur'));
         }
 
-        const inputUsoFactura =
-            inputRfc.value.length === 12
-                ? noFrequentElements.usoFacturaMoral
-                : noFrequentElements.usoFacturaFisica;
+        // const inputUsoFactura =
+        //     inputRfc.value.length === 12
+        //         ? noFrequentElements.usoFacturaMoral
+        //         : noFrequentElements.usoFacturaFisica;
 
-        inputUsoFactura.value = selectedClient.usoFactura;
-        inputUsoFactura.dispatchEvent(new Event('focus'));
+        // inputUsoFactura.value = selectedClient.usoFactura;
+        // inputUsoFactura.dispatchEvent(new Event('focus'));
 
-        await sleep(400);
-        const useOption =
-            inputRfc.value.length === 12
-                ? document.querySelector('#ui-id-5 > li')
-                : document.querySelector('#ui-id-6 > li');
+        // await sleep(400);
+        // const useOption =
+        //     inputRfc.value.length === 12
+        //         ? document.querySelector('#ui-id-5 > li')
+        //         : document.querySelector('#ui-id-6 > li');
 
-        if (useOption) {
-            useOption.dispatchEvent(new Event('click', { bubbles: true }));
-            inputUsoFactura.dispatchEvent(new Event('blur'));
-        }
+        // if (useOption) {
+        //     useOption.dispatchEvent(new Event('click', { bubbles: true }));
+        //     inputUsoFactura.dispatchEvent(new Event('blur'));
+        // }
 
     } else {
         console.error('No client found for RFC:', currentSelectedClient);
