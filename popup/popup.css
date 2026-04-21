@@ -1,7 +1,7 @@
 body {
     width: 320px;
     background-color: rgb(244 244 244);
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 .main {
@@ -38,25 +38,6 @@ body {
     height: 100%;
 }
 
-.popup-description {
-    margin-top: 1rem;
-    background-color: rgb(255 255 255);
-    border-radius: 4px;
-    cursor: context-menu;
-}
-
-.popup-description_wraper {
-    border: rgb(212, 212, 212) 1px solid;
-    border-radius: 4px;
-}
-
-.popup-description p {
-    display: block;
-    margin: 0.5rem auto;
-    font-size: 0.9rem;
-    line-height: 1.4rem;
-    text-align: center;
-}
 
 .popup-option {
     margin-bottom: 0.5rem;
@@ -66,8 +47,54 @@ body {
     border-radius: 4px;
 }
 
+
 .enabledContainer {
     background-color: rgb(244 244 244);
+    margin-top: 20px;
+}
+
+/* Toggle deslizable tipo iPhone */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    
+}
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+.slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 24px;
+    transition: background 0.3s;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.slider::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+.toggle-switch input[type="checkbox"]:checked + .slider {
+    background: #0d8d5c;
+}
+.toggle-switch input[type="checkbox"]:checked + .slider::before {
+    transform: translateX(20px);
+}
+.toggle-label {
+    font-size: 0.9rem;
+    color: #333;
 }
 
 #enabledButton {

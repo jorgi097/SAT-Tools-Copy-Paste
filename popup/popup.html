@@ -21,6 +21,8 @@
 </head>
 
 <body>
+    
+
     <div class="main">
         <div class="title-container">
             <div class="logo-container">
@@ -31,16 +33,12 @@
             </div>
         </div>
 
-        <div class="popup-description">
-            <div class="popup-description_wraper">
-                <p><b>Copia y Pega</b> en los<br>Portales del SAT</p>
-            </div>
-        </div>
-
         <div class="popup-option enabledContainer">
-            <button id="enabledButton" class="hint--top-right hint--rounded hint--info" aria-label="">
-                Loading...
-            </button>
+            <label class="toggle-switch" >
+                <input type="checkbox" id="enabledToggle">
+                <span class="slider"></span>
+                <span class="toggle-label"></span>
+            </label>
         </div>
 
         <p class="popup-option_title">Facturas</p>
@@ -60,6 +58,14 @@
             <button id="declarar-2" class="normal-button hint--top-left hint--rounded hint--info"
                 aria-label="Abrir el portal nuevo">
                 Portal Nuevo
+            </button>
+        </div>
+
+        <p class="popup-option_title">Obligaciones PF</p>
+        <div class="popup-option" id="obligaciones-fisica">
+            <button id="obligaciones-fisica-btn" class="normal-button hint--top-right hint--rounded hint--info"
+                aria-label="Abrir obligaciones persona física">
+                Obligaciones Persona Física
             </button>
         </div>
 
