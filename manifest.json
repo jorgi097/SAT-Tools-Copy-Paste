@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Herramientas SAT (Copiar-Pegar)",
+    "name": "Herramientas SAT",
     "version": "1.0",
     "description": "Habilita copiar y pegar en el portal de facturación y declaraciones del SAT.",
     "permissions": [

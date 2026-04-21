@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
 
-    <title>Herramientas SAT (Copiar-Pegar)</title>
+    <title>Herramientas SAT</title>
 
     <link rel="stylesheet" href="/popup/normalize.css" />
     <link rel="stylesheet" href="/lib/hint.css-2.7.0/hint.min.css" />
@@ -29,58 +29,42 @@
                 <img src="../src/Logo.svg" alt="Logo">
             </div>
             <div class="popup-title">
-                <h2 class=>HERRAMIENTAS SAT<br />(COPIAR-PEGAR)</h2>
+                <h2 class=>HERRAMIENTAS SAT</h2>
             </div>
         </div>
 
-        <div class="popup-option enabledContainer">
+        <div class="popup-option enabledContainer" style="display: flex; justify-content: space-between; align-items: center;">
             <label class="toggle-switch" >
                 <input type="checkbox" id="enabledToggle">
                 <span class="slider"></span>
                 <span class="toggle-label"></span>
             </label>
+            <div class="regime-toggle">
+                <select id="regimeSelect" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9rem;">
+                    <option value="fisica">Persona Física</option>
+                    <option value="moral">Persona Moral</option>
+                </select>
+            </div>
         </div>
 
-        <p class="popup-option_title">Facturas</p>
-        <div class="popup-option" id="facturar">
-            <button class="normal-button hint--top-right hint--rounded hint--info"
-                aria-label="Abrir portal de facturación">
-                Portal Facturación
-            </button>
-        </div>
+        <div id="general-section"></div>
+        <div id="dynamic-section"></div>
+        <div id="certificados-section"></div>
 
-        <p class="popup-option_title">Declaraciones</p>
-        <div class="popup-option flex-spacing" id="declarar">
-            <button id="declarar-1" class="normal-button hint--top-right hint--rounded hint--info"
-                aria-label="Abrir el portal viejo">
-                Portal Viejo
-            </button>
-            <button id="declarar-2" class="normal-button hint--top-left hint--rounded hint--info"
-                aria-label="Abrir el portal nuevo">
-                Portal Nuevo
-            </button>
-        </div>
-
-        <p class="popup-option_title">Obligaciones PF</p>
-        <div class="popup-option" id="obligaciones-fisica">
-            <button id="obligaciones-fisica-btn" class="normal-button hint--top-right hint--rounded hint--info"
-                aria-label="Abrir obligaciones persona física">
-                Obligaciones Persona Física
-            </button>
-        </div>
-
-        <p class="popup-option_title">Respaldos</p>
-        <div class="popup-option flex-spacing" id="backup">
-            <button id="backup-btn" class="normal-button hint--top-right hint--rounded hint--info"
-                aria-label="Crear archivo de respaldo">
-                Respaldar
-            </button>
-            <button id="restore-btn" class="normal-button hint--top-left hint--rounded hint--info"
-                aria-label="Restaurar desde archivo">
-                Restaurar
-            </button>
-            <input type="file" accept="application/json" id="restore-input" class="hidden">
-        </div>
+        <details>
+            <summary class="popup-option_title" style="cursor: pointer; user-select: none;">Respaldos</summary>
+            <div class="popup-option flex-spacing" id="backup">
+                <button id="backup-btn" class="normal-button hint--top-right hint--rounded hint--info"
+                    aria-label="Crear archivo de respaldo">
+                    Respaldar
+                </button>
+                <button id="restore-btn" class="normal-button hint--top-left hint--rounded hint--info"
+                    aria-label="Restaurar desde archivo">
+                    Restaurar
+                </button>
+                <input type="file" accept="application/json" id="restore-input" class="hidden">
+            </div>
+        </details>
     </div>
 </body>
 

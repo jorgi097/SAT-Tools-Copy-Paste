@@ -1,12 +1,12 @@
 body {
-    width: 320px;
+    width: 350px;
     background-color: rgb(244 244 244);
     padding: 10px 20px;
 }
 
 .main {
-    height: 400px;
-    max-height: 400px;
+    height: 510px;
+    max-height: 510px;
     overflow-y: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -50,7 +50,7 @@ body {
 
 .enabledContainer {
     background-color: rgb(244 244 244);
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 /* Toggle deslizable tipo iPhone */
