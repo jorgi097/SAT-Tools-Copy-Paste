@@ -1,99 +1,133 @@
 {
-    "principal": {
-        "url": "https://www.sat.gob.mx/portal/public/tramites-y-servicios"
+    "general": {
+        "tramites": {
+            "titulo": "Servicios Clave",
+            "facturacion": {
+                "url": "https://portal.facturaelectronica.sat.gob.mx/",
+                "nombre": "Portal Facturación",
+                "order": 1
+            },
+            "opinion": {
+                "url": "https://www.sat.gob.mx/portal/public/tramites/opinion-del-cumplimiento",
+                "nombre": "Opinion de Cumplimiento",
+                "order": 3
+            },
+            "constancia": {
+                "url": "https://www.sat.gob.mx/portal/public/tramites/constancia-de-situacion-fiscal",
+                "nombre": "Constancia de Situacion Fiscal",
+                "order": 2
+            },
+            "citas": {
+                "url": "https://citas.sat.gob.mx/",
+                "nombre": "Agendar Citas",
+                "order": 4
+            }
+        }
     },
     "fisica": {
-        "rfc": {
-            "url": "https://www.sat.gob.mx/portal/public/tramites/inscripcion-y-aviso-al-rfc"
-        },
-        "obligaciones": {
-            "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/33758/presenta-el-aviso-de-actualizacion-de-actividades-economicas-y-obligaciones-fiscales-como-persona-fisica&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx"
-        },
-        "domicilio": {
-            "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/30357/realiza-tu-cambio-de-domicilio-en-el-rfc&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx"
-        },
         "declaraciones": {
-            "url": "https://www.sat.gob.mx/portal/public/tramites/declaraciones-pf",
-            "provisionales": {
-                "resico": {
-                    "url": "https://pstcdypisr.clouda.sat.gob.mx/"
-                },
-                "empresarial": {
-                    "url": "https://ptscdecprov.clouda.sat.gob.mx/"
-                }
+            "titulo": "Declaraciones",
+            "provisional": {
+                "url": "https://ptscdecprov.clouda.sat.gob.mx/",
+                "nombre": "Provisionales",
+                "order": 1
             },
-            "diot": {
-                "url": "https://pstcdi.clouda.sat.gob.mx/"
+            "provicionalresico": {
+                "url": "https://pstcdypisr.clouda.sat.gob.mx/",
+                "nombre": "Provisional Resico",
+                "order": 2
             },
             "anual": {
-                "url": "https://anualpf.clouda.sat.gob.mx/"
+                "url": "https://anualpf.clouda.sat.gob.mx/",
+                "nombre": "Anual",
+                "order": 3
+            },
+            "diot": {
+                "url": "https://pstcdi.clouda.sat.gob.mx/",
+                "nombre": "DIOT",
+                "order": 4
+            }
+        },
+        "tramites": {
+            "titulo": "Actualización RFC",
+            "obligaciones": {
+                "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/33758/presenta-el-aviso-de-actualizacion-de-actividades-economicas-y-obligaciones-fiscales-como-persona-fisica&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx",
+                "nombre": "Cambio Obligaciones",
+                "order": 1
+            },
+            "domicilio": {
+                "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/30357/realiza-tu-cambio-de-domicilio-en-el-rfc&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx",
+                "nombre": "Cambio Domicilio",
+                "order": 2
             }
         }
     },
     "moral": {
-        "url": "https://www.sat.gob.mx/portal/public/tramites/inscripcion-y-avisos-rfc-pm",
-        "obligaciones": {
-            "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/34937/presenta-el-aviso-de-actualizacion-de-actividades-economicas-y-obligaciones-de-tu-empresa&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx"
-        },
-        "domicilio": {
-            "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/34794/realiza-el-cambio-de-domicilio-en-el-rfc-de-tu-empresa&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx"
-        },
         "declaraciones": {
-            "url": "https://www.sat.gob.mx/portal/public/tramites/declaraciones-pm",
-            "provisionales": {
-                "nueva": {
-                    "url": "https://pstcdypisr.clouda.sat.gob.mx/"
-                },
-                "anterior": {
-                    "url": "https://ptscdecprov.clouda.sat.gob.mx/"
-                }
+            "titulo": "Declaraciones",
+            "provisional_nueva": {
+                "url": "https://pstcdypisr.clouda.sat.gob.mx/",
+                "nombre": "Provisionales Nueva",
+                "order": 1
             },
-            "anual": {
-                "nuevo": {
-                    "url": "https://anualpm.clouda.sat.gob.mx/MoralesV2"
-                },
-                "antiguo": {
-                    "url": "https://anualpm.clouda.sat.gob.mx/"
-                }
+            "provisional_anterior": {
+                "url": "https://ptscdecprov.clouda.sat.gob.mx/",
+                "nombre": "Provisionales Anterior",
+                "order": 2
+            },
+            "anual_nueva": {
+                "url": "https://anualpm.clouda.sat.gob.mx/MoralesV2",
+                "nombre": "Anual Nueva",
+                "order": 3
+            },
+            "anual_anterior": {
+                "url": "https://anualpm.clouda.sat.gob.mx/",
+                "nombre": "Anual Anterior",
+                "order": 4
             },
             "diot": {
-                "url": "https://pstcdi.clouda.sat.gob.mx/"
+                "url": "https://pstcdi.clouda.sat.gob.mx/",
+                "nombre": "DIOT",
+                "order": 5
+            }
+        },
+        "tramites": {
+            "titulo": "Actualización RFC",
+            "obligaciones": {
+                "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/34937/presenta-el-aviso-de-actualizacion-de-actividades-economicas-y-obligaciones-de-tu-empresa&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx",
+                "nombre": "Cambio Obligaciones",
+                "order": 1
+            },
+            "domicilio": {
+                "url": "https://wwwmat.sat.gob.mx/app/seg/faces/pages/lanzador.jsf?url=/operacion/34794/realiza-el-cambio-de-domicilio-en-el-rfc-de-tu-empresa&tipoLogeo=c&target=principal&hostServer=https://wwwmat.sat.gob.mx",
+                "nombre": "Cambio Domicilio",
+                "order": 2
             }
         }
     },
-    "general": {
-        "facturacion": {
-            "url": "https://portal.facturaelectronica.sat.gob.mx/"
-        },
-        "opinion": {
-            "url": "https://www.sat.gob.mx/portal/public/tramites/opinion-del-cumplimiento"
-        },
-        "constancia": {
-            "url": "https://www.sat.gob.mx/portal/public/tramites/constancia-de-situacion-fiscal"
-        },
-        "citas": {
-            "url": "https://citas.sat.gob.mx/"
-        },
-        "satid": {
-            "url": "https://satid.sat.gob.mx/"
-        },
-        "certisat": {
-            "url": "https://aplicacionesc.mat.sat.gob.mx/certisat/"
-        },
-        "certifica": {
-            "32": {
-                "url": "https://portalsat.plataforma.sat.gob.mx/certifica/imagenes/32/Certifica.jar"
+    "certificados": {
+        "tramites": {
+            "titulo": "Gestión de Certificados",
+            "recuperacionCertificados": {
+                "url": "https://portalsat.plataforma.sat.gob.mx/RecuperacionDeCertificados/faces/consultaCertificados.xhtml",
+                "nombre": "Recuperar Certificados",
+                "order": 1
             },
-            "64": {
-                "url": "https://portalsat.plataforma.sat.gob.mx/certifica/imagenes/64/Certifica.jar"
+            "certisat": {
+                "url": "https://aplicacionesc.mat.sat.gob.mx/certisat/",
+                "nombre": "CertiSAT",
+                "order": 2
+            },
+            "satid": {
+                "url": "https://satid.sat.gob.mx/",
+                "nombre": "SatID",
+                "order": 3
+            },
+            "certifica32": {
+                "url": "https://portalsat.plataforma.sat.gob.mx/certifica/",
+                "nombre": "Descarga Certifica",
+                "order": 4
             }
-        },
-        "recuperacionCertificados": {
-            "url": "https://portalsat.plataforma.sat.gob.mx/RecuperacionDeCertificados/faces/consultaCertificados.xhtml"
         }
     }
 }
-
-
-
-
