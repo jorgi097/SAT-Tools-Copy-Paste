@@ -55,16 +55,3 @@ fechapago.addEventListener('change', (e) => {e.target.classList.remove("alert");
 
 // fecha de pago en rojo en listado final
 Array.from(document.querySelectorAll('[columna="grid_1560001_\\$7FECHAPAGO"]')).forEach(e => e.style.backgroundColor = "red")
-
-
-let primerNavBar = document.querySelector("body > nav");
-primerNavBar.parentElement.removeChild(primerNavBar)
-
-let primerHeader = document.querySelector("body > header")
-primerHeader.parentElement.removeChild(primerHeader)
-
-let segundoNavBar = document.querySelector("body > div.navbar.navbar-inverse.sub-navbar.navbar-fixed-top")
-segundoNavBar.style.marginTop = 0;
-
-let encabezado = document.querySelector("body > div.container.margin-menu-encabezado")
-encabezado.classList.remove('margin-menu-encabezado')
