@@ -4,6 +4,10 @@ const hideQueries = {
   privacidad: 'body > div:nth-child(10) > div:nth-child(6)',
   primerNavBar: 'body > nav',
   primerHeader: 'body > header',
+  version: 'body > div:nth-child(5) > div > div.col-sm-6 > span',
+  comprobanteTitle: '#Comprobante > div:nth-child(1) > h5',
+  divisor: 'body > div:nth-child(5) > div > div.col-sm-2',
+  addenda: '#GeneraAdenda',
 };
 
 async function hideElements() {
@@ -34,6 +38,11 @@ async function transformElements() {
 
   const navMenu = await getDomElement('#subenlaces > ul');
   navMenu.style.padding = 0;
+
+  const nombre = await getDomElement(
+    'body > div:nth-child(5) > div > div.col-sm-4.detalleUsuario.text-right',
+  );
+  nombre.style.width = '50%';
 }
 
 hideElements();

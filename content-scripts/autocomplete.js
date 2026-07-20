@@ -77,7 +77,7 @@ function frequentAutocomplete() {
     });
 }
 
-// Execute the script only when all elements are loaded
+// Check all elements are loaded and then execute the autocomplete function
 const checkElementExists = setInterval(() => {
     Object.entries(frequentElementQueries).forEach(([key, query]) => {
         if (!frequentElements[key]) {

@@ -39,6 +39,20 @@ const scripts = [
     allFrames: true,
   },
   {
+    id: 'hide',
+    js: [
+      'content-scripts/utils.js',
+      'content-scripts/hide.js',
+    ],
+    persistAcrossSessions: true,
+    matches: [
+      'https://portal.facturaelectronica.sat.gob.mx/*',
+    ],
+    runAt: 'document_idle',
+    world: 'ISOLATED',
+    allFrames: true,
+  },
+  {
     id: 'constancia-script',
     js: ['content-scripts/constancia.js'],
     persistAcrossSessions: true,
