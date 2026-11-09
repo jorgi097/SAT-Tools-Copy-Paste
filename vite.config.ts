@@ -1,10 +1,50 @@
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { buildSync } from 'esbuild';
+import { readdirSync, existsSync, rmSync } from 'fs';
+
+function bundleContentScriptsPlugin(): Plugin {
+  return {
+    name: 'bundle-content-scripts',
+    closeBundle() {
+      const contentScriptsDir = resolve(__dirname, 'src/content-scripts');
+      if (!existsSync(contentScriptsDir)) return;
+
+      const files = readdirSync(contentScriptsDir).filter(
+        file => file.endsWith('.ts') || file.endsWith('.js')
+      );
+
+      files.forEach(file => {
+        const name = file.replace(/\.(ts|js)$/, '');
+        buildSync({
+          entryPoints: [resolve(contentScriptsDir, file)],
+          outfile: resolve(__dirname, `dist/content-scripts/${name}.js`),
+          bundle: true,
+          minify: false,
+          target: 'es2020',
+          format: 'iife',
+        });
+      });
+
+      // Eliminar chunks compartidos en dist/assets si existen (ya no son necesarios)
+      const assetsDir = resolve(__dirname, 'dist/assets');
+      if (existsSync(assetsDir)) {
+        const assetFiles = readdirSync(assetsDir);
+        assetFiles.forEach(asset => {
+          if (asset.startsWith('dom-') && asset.endsWith('.js')) {
+            rmSync(resolve(assetsDir, asset), { force: true });
+          }
+        });
+      }
+    },
+  };
+}
 
 export default defineConfig({
   plugins: [
-    react()
+    react(),
+    bundleContentScriptsPlugin(),
   ],
   build: {
     outDir: 'dist',
@@ -20,6 +60,7 @@ export default defineConfig({
         'content-scripts/paste': resolve(__dirname, 'src/content-scripts/paste.ts'),
         'content-scripts/reload': resolve(__dirname, 'src/content-scripts/reload.ts'),
         'content-scripts/csf-autocomplete': resolve(__dirname, 'src/content-scripts/csf-autocomplete.ts'),
+        'content-scripts/invoice-data': resolve(__dirname, 'src/content-scripts/invoice-data.ts'),
         'content-scripts/utils': resolve(__dirname, 'src/content-scripts/utils.ts'),
       },
       output: {

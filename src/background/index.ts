@@ -41,6 +41,20 @@ const scripts: chrome.scripting.RegisteredContentScript[] = [
     allFrames: true,
   },
   {
+    id: 'invoice-data-script',
+    js: [
+      'content-scripts/utils.js',
+      'content-scripts/invoice-data.js',
+    ],
+    persistAcrossSessions: true,
+    matches: [
+      'https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura*',
+    ],
+    runAt: 'document_idle',
+    world: 'ISOLATED',
+    allFrames: true,
+  },
+  {
     id: 'hide',
     js: [
       'content-scripts/utils.js',

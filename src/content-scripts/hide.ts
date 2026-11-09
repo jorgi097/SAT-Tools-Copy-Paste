@@ -23,25 +23,30 @@ async function hideElements(): Promise<void> {
   });
 }
 
-async function transformElements(): Promise<void> {
-  const segundoNavBar = await getDomElement('body > div.navbar.navbar-inverse.sub-navbar.navbar-fixed-top');
-  if (segundoNavBar) segundoNavBar.style.marginTop = '0';
+async function adjustLayoutForNavbar(): Promise<void> {
+  // El navbar principal se encuentra fijo, por lo que se debe eliminar el margen superior del body y del encabezado
+  const mainNavbarElement = await getDomElement('body > div.navbar.navbar-inverse.sub-navbar.navbar-fixed-top');
+  if (mainNavbarElement) mainNavbarElement.style.marginTop = '0';
 
-  const encabezadoWrapper = await getDomElement('body > div.container.margin-menu-encabezado');
-  if (encabezadoWrapper) encabezadoWrapper.classList.remove('margin-menu-encabezado');
+  // Es el contenedor con el RFC y el nombre del usuario, se debe eliminar la clase que le da margen superior al encabezado
+  const userInfoWrapper = await getDomElement('body > div.container.margin-menu-encabezado');
+  if (userInfoWrapper) userInfoWrapper.classList.remove('margin-menu-encabezado');
 
-  const encabezadoContent = await getDomElement('body > div:nth-child(5) > div');
-  if (encabezadoContent) encabezadoContent.style.marginTop = '15px';
+  // Se debe eliminar el margen superior del contenedor que tiene el nombre del usuario y el RFC, para que quede pegado al encabezado
+  const userInfoContent = await getDomElement('body > div:nth-child(5) > div');
+  if (userInfoContent) userInfoContent.style.marginTop = '15px';
 
-  const titulo = await getDomElement('#tituloFI');
-  if (titulo) titulo.style.top = '0';
+  // Se debe eliminar el margen superior del contenedor que tiene el nombre del usuario y el RFC, para que quede pegado al encabezado
+  const mainNavbarTitle = await getDomElement('#tituloFI');
+  if (mainNavbarTitle) mainNavbarTitle.style.top = '0';
 
-  const navMenu = await getDomElement('#subenlaces > ul');
-  if (navMenu) navMenu.style.padding = '0';
+  // Se debe eliminar el padding del contenedor que tiene los enlaces del navbar principal, para que quede pegado al encabezado
+  const mainNavbarMenu = await getDomElement('#subenlaces > ul');
+  if (mainNavbarMenu) mainNavbarMenu.style.padding = '0';
 
+  // Se aumenta de 33.33 % a 50% el ancho del contenedor que tiene el nombre del usuario y el RFC, para que quepa más información en una sola línea y no se rompa el diseño de la página
   const nombre = await getDomElement('body > div:nth-child(5) > div > div.col-sm-4.detalleUsuario.text-right');
   if (nombre) nombre.style.width = '50%';
 }
 
-hideElements();
-transformElements();
+hideElements().then(() => adjustLayoutForNavbar());
