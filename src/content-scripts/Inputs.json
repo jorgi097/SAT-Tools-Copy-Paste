@@ -1,0 +1,1374 @@
+{
+    "menu_principal": [
+        {
+            "tag": "a",
+            "nombre": "generar",
+            "descripcion": "Boton que muestra la lista de opciones para generar facturas",
+            "selector_css": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+            "id": null,
+            "valor_actual": "https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura#"
+        },
+        {
+            "nombre": "generar",
+            "descripcion": "Lista que muestra las opciones para generar facturas",
+            "tag": "ul",
+            "id": null,
+            "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(2) > ul:nth-of-type(1)",
+            "items": [
+                {
+                    "nombre": "Nueva factura",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "Mi Factura",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/Factura/Temporales?tipo=MiFactura",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "Comprobantes no certificados",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/Factura/Temporales?tipo=Temporales",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(3)"
+                },
+                {
+                    "nombre": "Acuse de términos y condiciones",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/TerminosCondiciones/Acuse",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(4)"
+                }
+            ]
+        },
+        {
+            "tag": "a",
+            "nombre": "https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura#",
+            "descripcion": "Boton que muestra la lista de opciones de configuración de las facturas",
+            "selector_css": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+            "id": null,
+            "valor_actual": "https://portal.facturaelectronica.sat.gob.mx/Factura/GeneraFactura#"
+        },
+        {
+            "nombre": "configuracion",
+            "descripcion": "Lista que muestra las opciones de configuración de las facturas",
+            "tag": "ul",
+            "id": null,
+            "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(3) > ul:nth-of-type(1)",
+            "items": [
+                {
+                    "nombre": "Básica",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/Administracion/ConfiguracionCatalogos",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "Avanzada",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/ConfiguracionAvanzada",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "Configuración de datos del emisor",
+                    "valor": "https://portal.facturaelectronica.sat.gob.mx/Configuracion/Emisor",
+                    "id": null,
+                    "selector": "#subenlaces > ul:nth-of-type(1) > li:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(3)"
+                }
+            ]
+        }
+    ],
+    "rfc_y_nombre": [],
+    "datos_fiscales": [
+        {
+            "tag": "a",
+            "nombre": "regimenFiscal",
+            "descripcion": "Boton que muestra la lista de regimenes fiscales del usuario",
+            "selector_css": "#E1350006Pregimen",
+            "id": "E1350006Pregimen",
+            "valor_actual": null
+        },
+        {
+            "tag": "a",
+            "nombre": "codigoPostal",
+            "descripcion": "Boton que muestra la lista de codigos postales del usuario",
+            "selector_css": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)",
+            "id": null,
+            "valor_actual": null
+        },
+        {
+            "tag": "a",
+            "nombre": "fechaDeEmision",
+            "descripcion": "Boton que muestra el calendario para elegir la fecha de emisión",
+            "selector_css": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(6) > div:nth-of-type(2) > a:nth-of-type(1)",
+            "id": null,
+            "valor_actual": null
+        },
+        {
+            "tag": "a",
+            "nombre": "tipoDeFactura",
+            "descripcion": "Boton que muestra la lista de tipos de factura",
+            "selector_css": "#E1350006PtipodeFactura",
+            "id": "E1350006PtipodeFactura",
+            "valor_actual": null
+        },
+        {
+            "nombre": "listaTipoDeFactura",
+            "descripcion": "",
+            "tag": "ul",
+            "id": null,
+            "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(8) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1)",
+            "items": [
+                {
+                    "nombre": "Ingreso",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(8) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "Egreso",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(8) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "Traslado",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(8) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(3)"
+                }
+            ]
+        },
+        {
+            "tag": "a",
+            "nombre": "formaDePago",
+            "descripcion": "Boton que muestra la lista de formas de pago",
+            "selector_css": "#E1350006PformadePago",
+            "id": "E1350006PformadePago",
+            "valor_actual": null
+        },
+        {
+            "nombre": "listaFormasDePago",
+            "descripcion": "",
+            "tag": "ul",
+            "id": null,
+            "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1)",
+            "items": [
+                {
+                    "nombre": "Transferencia electrónica de fondos (incluye SPEI)",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "Efectivo",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "Cheque Nominativo",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(3)"
+                },
+                {
+                    "nombre": "Tarjeta de crédito",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(4)"
+                },
+                {
+                    "nombre": "Monedero electrónico",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(5)"
+                },
+                {
+                    "nombre": "Dinero electrónico",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(6)"
+                },
+                {
+                    "nombre": "Vales de despensa",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(7)"
+                },
+                {
+                    "nombre": "Dación en pago",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(8)"
+                },
+                {
+                    "nombre": "Pago por subrogación",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(9)"
+                },
+                {
+                    "nombre": "Pago por consignación",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(10)"
+                },
+                {
+                    "nombre": "Condonación",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(11)"
+                },
+                {
+                    "nombre": "Compensación",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(12)"
+                },
+                {
+                    "nombre": "Novación",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(13)"
+                },
+                {
+                    "nombre": "Confusión",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(14)"
+                },
+                {
+                    "nombre": "Remisión de deuda",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(15)"
+                },
+                {
+                    "nombre": "Prescripción o caducidad",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(16)"
+                },
+                {
+                    "nombre": "A satisfacción del acreedor",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(17)"
+                },
+                {
+                    "nombre": "Tarjeta de débito",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(18)"
+                },
+                {
+                    "nombre": "Tarjeta de servicios",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(19)"
+                },
+                {
+                    "nombre": "Aplicación de anticipos",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(20)"
+                },
+                {
+                    "nombre": "Intermediario pagos",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(21)"
+                },
+                {
+                    "nombre": "Por definir",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(10) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(22)"
+                }
+            ]
+        },
+        {
+            "tag": "a",
+            "nombre": "metodoDePago",
+            "descripcion": "Boton que muestra las opciones de metodo de pago",
+            "selector_css": "#E1350006PmetododePago",
+            "id": "E1350006PmetododePago",
+            "valor_actual": null
+        },
+        {
+            "nombre": "listaMetodoDePago",
+            "descripcion": "",
+            "tag": "ul",
+            "id": null,
+            "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(12) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1)",
+            "items": [
+                {
+                    "nombre": "Pago en una sola exhibición",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(12) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "Pago en parcialidades o diferido",
+                    "valor": null,
+                    "id": null,
+                    "selector": "#A135row2 > div:nth-of-type(2) > div:nth-of-type(12) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2)"
+                }
+            ]
+        }
+    ],
+    "datos_generales": [
+        {
+            "tag": "input",
+            "nombre": "moneda",
+            "descripcion": "Input donde se selecciona la moneda con la que se lleva a cabo la operación",
+            "selector_css": "#\\31 35textboxautocomplete32",
+            "id": "135textboxautocomplete32",
+            "valor_actual": null
+        },
+        {
+            "nombre": "listaDeMoneda",
+            "descripcion": "Lista que muestra las opciones de moneda con las que se puede llevar a cabo la operación",
+            "tag": "ul",
+            "id": "ui-id-1",
+            "selector": "#ui-id-1",
+            "items": [
+                {
+                    "nombre": "Peso Mexicano",
+                    "valor": "Peso Mexicano",
+                    "id": null,
+                    "selector": "#ui-id-1 > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "Dólar americano",
+                    "valor": "Dólar americano",
+                    "id": null,
+                    "selector": "#ui-id-1 > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "Euro",
+                    "valor": "Euro",
+                    "id": null,
+                    "selector": "#ui-id-1 > li:nth-of-type(3)"
+                },
+                {
+                    "nombre": "Dólar Canadiense",
+                    "valor": "Dólar Canadiense",
+                    "id": null,
+                    "selector": "#ui-id-1 > li:nth-of-type(4)"
+                },
+                {
+                    "nombre": "México Unidad de Inversión (UDI)",
+                    "valor": "México Unidad de Inversión (UDI)",
+                    "id": null,
+                    "selector": "#ui-id-1 > li:nth-of-type(5)"
+                }
+            ]
+        },
+        {
+            "tag": "input",
+            "nombre": "tipoDeCambio",
+            "descripcion": "Input donde se ingresa el monto de conversion de la moneda seleccionada de la listaDeMoneda. No aplica si la moneda ya es Peso Mexicano",
+            "selector_css": "#\\31 35textbox34",
+            "id": "135textbox34",
+            "valor_actual": ""
+        },
+        {
+            "tag": "input",
+            "nombre": "serie",
+            "descripcion": "Input donde se puede ingresar caracteres alfabeticos que son la primera parte de un identificador alfanumerico serie y folio",
+            "selector_css": "#\\31 35textbox36",
+            "id": "135textbox36",
+            "valor_actual": ""
+        },
+        {
+            "tag": "input",
+            "nombre": "folio",
+            "descripcion": "Input donde se ingresa un numero de folio correspondiente a una serie. Si la serie ya existe el folio toma el autoincremental",
+            "selector_css": "#\\31 35textbox37",
+            "id": "135textbox37",
+            "valor_actual": ""
+        }
+    ],
+    "datos_del_cliente": [
+        {
+            "comun": [
+                {
+                    "tag": "input",
+                    "nombre": "clienteFrecuente",
+                    "descripcion": "Input donde se muestran 4 opciones: 1) RFC de clientes guardados dentro de la plataforma del SAT. 2) RFC generico mexicano. 3) RFC generico extranjero. 4) Otro: Que habilita los campos para llenar manualmente los datos del cliente",
+                    "selector_css": "#\\31 35textboxautocomplete55",
+                    "id": "135textboxautocomplete55",
+                    "valor_actual": null
+                },
+                {
+                    "nombre": "listaClienteFrecuente",
+                    "descripcion": "",
+                    "tag": "ul",
+                    "id": "ui-id-2",
+                    "selector": "#ui-id-2",
+                    "items": [
+                        {
+                            "nombre": "VCE240924572",
+                            "valor": "VCE240924572",
+                            "id": null,
+                            "selector": "#ui-id-2 > li:nth-of-type(1)"
+                        },
+                        {
+                            "nombre": "XAXX010101000",
+                            "valor": "XAXX010101000",
+                            "id": null,
+                            "selector": "#ui-id-2 > li:nth-of-type(2)"
+                        },
+                        {
+                            "nombre": "XEXX010101000",
+                            "valor": "XEXX010101000",
+                            "id": null,
+                            "selector": "#ui-id-2 > li:nth-of-type(3)"
+                        },
+                        {
+                            "nombre": "Otro",
+                            "valor": "Otro",
+                            "id": null,
+                            "selector": "#ui-id-2 > li:nth-of-type(4)"
+                        }
+                    ]
+                }
+            ],
+            "cliente_frecuente": [
+                {
+                    "tag": "input",
+                    "nombre": "razonSocial",
+                    "descripcion": "Input donde se ingresa el nombre completo de la persona fisica o moral",
+                    "selector_css": "#\\31 35textbox60",
+                    "id": "135textbox60",
+                    "valor_actual": null
+                },
+                {
+                    "tag": "input",
+                    "nombre": "codigoPostal",
+                    "descripcion": "Input donde se ingresa el codigo postal de la persona fisica o moral",
+                    "selector_css": "#\\31 35textbox61",
+                    "id": "135textbox61",
+                    "valor_actual": null
+                },
+                {
+                    "tag": "input",
+                    "nombre": "regimenFiscal",
+                    "descripcion": "Input donde se muestra una lista para seleccionar el regimen fiscal de la persona fisica o moral",
+                    "selector_css": "#\\31 35textboxautocomplete62",
+                    "id": "135textboxautocomplete62",
+                    "valor_actual": null
+                },
+                {
+                    "nombre": "listaDeRegimenFiscal",
+                    "descripcion": "",
+                    "tag": "ul",
+                    "id": "ui-id-3",
+                    "selector": "#ui-id-3",
+                    "items": [
+                        {
+                            "nombre": "601 General de Ley Personas Morales",
+                            "valor": "601 General de Ley Personas Morales",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(1)"
+                        },
+                        {
+                            "nombre": "603 Personas Morales con Fines no Lucrativos",
+                            "valor": "603 Personas Morales con Fines no Lucrativos",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(2)"
+                        },
+                        {
+                            "nombre": "605 Sueldos y Salarios e Ingresos Asimilados a Salarios",
+                            "valor": "605 Sueldos y Salarios e Ingresos Asimilados a Salarios",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(3)"
+                        },
+                        {
+                            "nombre": "606 Arrendamiento",
+                            "valor": "606 Arrendamiento",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(4)"
+                        },
+                        {
+                            "nombre": "607 Régimen de Enajenación o Adquisición de Bienes",
+                            "valor": "607 Régimen de Enajenación o Adquisición de Bienes",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(5)"
+                        },
+                        {
+                            "nombre": "608 Demás ingresos",
+                            "valor": "608 Demás ingresos",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(6)"
+                        },
+                        {
+                            "nombre": "610 Residentes en el Extranjero sin Establecimiento Permanente en México",
+                            "valor": "610 Residentes en el Extranjero sin Establecimiento Permanente en México",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(7)"
+                        },
+                        {
+                            "nombre": "611 Ingresos por Dividendos (socios y accionistas)",
+                            "valor": "611 Ingresos por Dividendos (socios y accionistas)",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(8)"
+                        },
+                        {
+                            "nombre": "612 Personas Físicas con Actividades Empresariales y Profesionales",
+                            "valor": "612 Personas Físicas con Actividades Empresariales y Profesionales",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(9)"
+                        },
+                        {
+                            "nombre": "614 Ingresos por intereses",
+                            "valor": "614 Ingresos por intereses",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(10)"
+                        },
+                        {
+                            "nombre": "615 Régimen de los ingresos por obtención de premios",
+                            "valor": "615 Régimen de los ingresos por obtención de premios",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(11)"
+                        },
+                        {
+                            "nombre": "616 Sin obligaciones fiscales",
+                            "valor": "616 Sin obligaciones fiscales",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(12)"
+                        },
+                        {
+                            "nombre": "620 Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
+                            "valor": "620 Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(13)"
+                        },
+                        {
+                            "nombre": "621 Incorporación Fiscal",
+                            "valor": "621 Incorporación Fiscal",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(14)"
+                        },
+                        {
+                            "nombre": "622 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
+                            "valor": "622 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(15)"
+                        },
+                        {
+                            "nombre": "623 Opcional para Grupos de Sociedades",
+                            "valor": "623 Opcional para Grupos de Sociedades",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(16)"
+                        },
+                        {
+                            "nombre": "624 Coordinados",
+                            "valor": "624 Coordinados",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(17)"
+                        },
+                        {
+                            "nombre": "625 Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",
+                            "valor": "625 Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(18)"
+                        },
+                        {
+                            "nombre": "626 Régimen Simplificado de Confianza",
+                            "valor": "626 Régimen Simplificado de Confianza",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(19)"
+                        }
+                    ]
+                },
+                {
+                    "tag": "input",
+                    "nombre": "usoDeLaFactura",
+                    "descripcion": "Input donde se muestra una lista para seleccionar el uso de la factura",
+                    "selector_css": "#\\31 35textboxautocomplete66",
+                    "id": "135textboxautocomplete66",
+                    "valor_actual": null
+                },
+                {
+                    "nombre": "listaDeUsoFactura",
+                    "descripcion": "",
+                    "tag": "ul",
+                    "id": "ui-id-4",
+                    "selector": "#ui-id-4",
+                    "items": [
+                        {
+                            "nombre": "Gastos en general.",
+                            "valor": "Gastos en general.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(1)"
+                        },
+                        {
+                            "nombre": "Adquisición de mercancías.",
+                            "valor": "Adquisición de mercancías.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(2)"
+                        },
+                        {
+                            "nombre": "Comunicaciones satelitales.",
+                            "valor": "Comunicaciones satelitales.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(3)"
+                        },
+                        {
+                            "nombre": "Comunicaciones telefónicas.",
+                            "valor": "Comunicaciones telefónicas.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(4)"
+                        },
+                        {
+                            "nombre": "Construcciones.",
+                            "valor": "Construcciones.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(5)"
+                        },
+                        {
+                            "nombre": "Dados, troqueles, moldes, matrices y herramental.",
+                            "valor": "Dados, troqueles, moldes, matrices y herramental.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(6)"
+                        },
+                        {
+                            "nombre": "Devoluciones, descuentos o bonificaciones.",
+                            "valor": "Devoluciones, descuentos o bonificaciones.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(7)"
+                        },
+                        {
+                            "nombre": "Equipo de computo y accesorios.",
+                            "valor": "Equipo de computo y accesorios.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(8)"
+                        },
+                        {
+                            "nombre": "Equipo de transporte.",
+                            "valor": "Equipo de transporte.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(9)"
+                        },
+                        {
+                            "nombre": "Mobiliario y equipo de oficina por inversiones.",
+                            "valor": "Mobiliario y equipo de oficina por inversiones.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(10)"
+                        },
+                        {
+                            "nombre": "Otra maquinaria y equipo.",
+                            "valor": "Otra maquinaria y equipo.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(11)"
+                        },
+                        {
+                            "nombre": "Pagos",
+                            "valor": "Pagos",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(12)"
+                        },
+                        {
+                            "nombre": "Sin efectos fiscales.",
+                            "valor": "Sin efectos fiscales.",
+                            "id": null,
+                            "selector": "#ui-id-4 > li:nth-of-type(13)"
+                        }
+                    ]
+                }
+            ],
+            "cliente_no_frecuente": [
+                {
+                    "tag": "input",
+                    "nombre": "rfc",
+                    "descripcion": "Input donde se ingresa el RFC de la persona fisica o moral",
+                    "selector_css": "#\\31 35textbox59",
+                    "id": "135textbox59",
+                    "valor_actual": null
+                },
+                {
+                    "tag": "input",
+                    "nombre": "razonSocial",
+                    "descripcion": "Input donde se ingresa el nombre completo de la persona fisica o moral",
+                    "selector_css": "#\\31 35textbox60",
+                    "id": "135textbox60",
+                    "valor_actual": null
+                },
+                {
+                    "tag": "input",
+                    "nombre": "codigoPostal",
+                    "descripcion": "Input donde se ingresa el codigo postal de la persona fisica o moral",
+                    "selector_css": "#\\31 35textbox61",
+                    "id": "135textbox61",
+                    "valor_actual": null
+                },
+                {
+                    "tag": "input",
+                    "nombre": "regimenFiscal",
+                    "descripcion": "Input donde se muestra una lista para seleccionar el regimen fiscal de la persona fisica o moral",
+                    "selector_css": "#\\31 35textboxautocomplete62",
+                    "id": "135textboxautocomplete62",
+                    "valor_actual": null
+                },
+                {
+                    "nombre": "listaDeRegimenFiscal",
+                    "descripcion": "",
+                    "tag": "ul",
+                    "id": "ui-id-3",
+                    "selector": "#ui-id-3",
+                    "items": [
+                        {
+                            "nombre": "601 General de Ley Personas Morales",
+                            "valor": "601 General de Ley Personas Morales",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(1)"
+                        },
+                        {
+                            "nombre": "603 Personas Morales con Fines no Lucrativos",
+                            "valor": "603 Personas Morales con Fines no Lucrativos",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(2)"
+                        },
+                        {
+                            "nombre": "605 Sueldos y Salarios e Ingresos Asimilados a Salarios",
+                            "valor": "605 Sueldos y Salarios e Ingresos Asimilados a Salarios",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(3)"
+                        },
+                        {
+                            "nombre": "606 Arrendamiento",
+                            "valor": "606 Arrendamiento",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(4)"
+                        },
+                        {
+                            "nombre": "607 Régimen de Enajenación o Adquisición de Bienes",
+                            "valor": "607 Régimen de Enajenación o Adquisición de Bienes",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(5)"
+                        },
+                        {
+                            "nombre": "608 Demás ingresos",
+                            "valor": "608 Demás ingresos",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(6)"
+                        },
+                        {
+                            "nombre": "610 Residentes en el Extranjero sin Establecimiento Permanente en México",
+                            "valor": "610 Residentes en el Extranjero sin Establecimiento Permanente en México",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(7)"
+                        },
+                        {
+                            "nombre": "611 Ingresos por Dividendos (socios y accionistas)",
+                            "valor": "611 Ingresos por Dividendos (socios y accionistas)",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(8)"
+                        },
+                        {
+                            "nombre": "612 Personas Físicas con Actividades Empresariales y Profesionales",
+                            "valor": "612 Personas Físicas con Actividades Empresariales y Profesionales",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(9)"
+                        },
+                        {
+                            "nombre": "614 Ingresos por intereses",
+                            "valor": "614 Ingresos por intereses",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(10)"
+                        },
+                        {
+                            "nombre": "615 Régimen de los ingresos por obtención de premios",
+                            "valor": "615 Régimen de los ingresos por obtención de premios",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(11)"
+                        },
+                        {
+                            "nombre": "616 Sin obligaciones fiscales",
+                            "valor": "616 Sin obligaciones fiscales",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(12)"
+                        },
+                        {
+                            "nombre": "620 Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
+                            "valor": "620 Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(13)"
+                        },
+                        {
+                            "nombre": "621 Incorporación Fiscal",
+                            "valor": "621 Incorporación Fiscal",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(14)"
+                        },
+                        {
+                            "nombre": "622 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
+                            "valor": "622 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(15)"
+                        },
+                        {
+                            "nombre": "623 Opcional para Grupos de Sociedades",
+                            "valor": "623 Opcional para Grupos de Sociedades",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(16)"
+                        },
+                        {
+                            "nombre": "624 Coordinados",
+                            "valor": "624 Coordinados",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(17)"
+                        },
+                        {
+                            "nombre": "625 Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",
+                            "valor": "625 Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(18)"
+                        },
+                        {
+                            "nombre": "626 Régimen Simplificado de Confianza",
+                            "valor": "626 Régimen Simplificado de Confianza",
+                            "id": null,
+                            "selector": "#ui-id-3 > li:nth-of-type(19)"
+                        }
+                    ]
+                },
+                {
+                    "tag": "input",
+                    "nombre": "usoDeLaFactura",
+                    "descripcion": "Input donde se muestra una lista para seleccionar el uso de la factura",
+                    "selector_css": "#\\31 35textboxautocomplete71",
+                    "id": "135textboxautocomplete71",
+                    "valor_actual": null
+                },
+                {
+                    "nombre": "listaDeUsoFactura",
+                    "descripcion": "",
+                    "tag": "ul",
+                    "id": "ui-id-5",
+                    "selector": "#ui-id-5",
+                    "items": [
+                        {
+                            "nombre": "Pagos",
+                            "valor": "Pagos",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(1)"
+                        },
+                        {
+                            "nombre": "Adquisición de mercancías.",
+                            "valor": "Adquisición de mercancías.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(2)"
+                        },
+                        {
+                            "nombre": "Devoluciones, descuentos o bonificaciones.",
+                            "valor": "Devoluciones, descuentos o bonificaciones.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(3)"
+                        },
+                        {
+                            "nombre": "Gastos en general.",
+                            "valor": "Gastos en general.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(4)"
+                        },
+                        {
+                            "nombre": "Construcciones.",
+                            "valor": "Construcciones.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(5)"
+                        },
+                        {
+                            "nombre": "Mobiliario y equipo de oficina por inversiones.",
+                            "valor": "Mobiliario y equipo de oficina por inversiones.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(6)"
+                        },
+                        {
+                            "nombre": "Equipo de transporte.",
+                            "valor": "Equipo de transporte.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(7)"
+                        },
+                        {
+                            "nombre": "Equipo de computo y accesorios.",
+                            "valor": "Equipo de computo y accesorios.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(8)"
+                        },
+                        {
+                            "nombre": "Dados, troqueles, moldes, matrices y herramental.",
+                            "valor": "Dados, troqueles, moldes, matrices y herramental.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(9)"
+                        },
+                        {
+                            "nombre": "Comunicaciones telefónicas.",
+                            "valor": "Comunicaciones telefónicas.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(10)"
+                        },
+                        {
+                            "nombre": "Comunicaciones satelitales.",
+                            "valor": "Comunicaciones satelitales.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(11)"
+                        },
+                        {
+                            "nombre": "Otra maquinaria y equipo.",
+                            "valor": "Otra maquinaria y equipo.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(12)"
+                        },
+                        {
+                            "nombre": "Sin efectos fiscales.",
+                            "valor": "Sin efectos fiscales.",
+                            "id": null,
+                            "selector": "#ui-id-5 > li:nth-of-type(13)"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "producto_y_servicio": [
+        {
+            "tag": "button",
+            "nombre": "agregar",
+            "descripcion": "Boton que habilta el registro de productos y servicios",
+            "selector_css": "#\\31 35gridformedit98 > button:nth-of-type(1)",
+            "id": null,
+            "valor_actual": "Agregar"
+        },
+        {
+            "tag": "input",
+            "nombre": "descripcionDetallada",
+            "descripcion": "Input donde se ingresa el nombre del producto o servicio a facturar. Tambien muestra una lista con descripciones usadas anteriormente.",
+            "selector_css": "#\\31 35textboxautocomplete113",
+            "id": "135textboxautocomplete113",
+            "valor_actual": null
+        },
+        {
+            "nombre": "listaDescripcionDetallada",
+            "descripcion": "",
+            "tag": "ul",
+            "id": "ui-id-8",
+            "selector": "#ui-id-8",
+            "items": [
+                {
+                    "nombre": "DESARROLLO Y ANALISIS DE MERCADO RELACIONES PUBLICA Y PROMOCIONAL DE MARCA.",
+                    "valor": "DESARROLLO Y ANALISIS DE MERCADO RELACIONES PUBLICA Y PROMOCIONAL DE MARCA.",
+                    "id": null,
+                    "selector": "#ui-id-8 > li:nth-of-type(1)"
+                }
+            ]
+        },
+        {
+            "tag": "input",
+            "nombre": "productoOServicio",
+            "descripcion": "Input donde se ingresa el producto o servicio de la lista del SAT",
+            "selector_css": "#\\31 35textboxautocomplete118",
+            "id": "135textboxautocomplete118",
+            "valor_actual": "Servicios de promoción comercial"
+        },
+        {
+            "tag": "input",
+            "nombre": "unidadDeMedida",
+            "descripcion": "Input donde se ingresa la unidad de medida del producto o servicio de la lista del SAT",
+            "selector_css": "#\\31 35textboxautocomplete123",
+            "id": "135textboxautocomplete123",
+            "valor_actual": "Unidad de servicio"
+        },
+        {
+            "tag": "input",
+            "nombre": "cantidad",
+            "descripcion": "Input donde se ingresa la cantidad de unidades del producto o servicio",
+            "selector_css": "#\\31 35textbox114",
+            "id": "135textbox114",
+            "valor_actual": "1"
+        },
+        {
+            "tag": "input",
+            "nombre": "valorUnitario",
+            "descripcion": "Input donde se ingresa el valor unitario de cada unidad del producto o servicio",
+            "selector_css": "#\\31 35textbox119",
+            "id": "135textbox119",
+            "valor_actual": "21200"
+        },
+        {
+            "nombre": "importe",
+            "descripcion": "Input no editable. Muestra el importe total por ese producto o servicio multiplicando la cantidad por el valor unitario.",
+            "selector_css": "#\\31 35textbox124"
+        },
+        {
+            "tag": "input",
+            "nombre": "descuento",
+            "descripcion": "Input donde se ingresa el valor del descuento aplicado en el producto o servicio",
+            "selector_css": "#\\31 35textbox129",
+            "id": "135textbox129",
+            "valor_actual": null
+        },
+        {
+            "tag": "select",
+            "nombre": "objetoDeImpuesto",
+            "descripcion": "Desplegable que muestra una lista de opciones sobre la aplicabilidad de impuestos al producto o servicio",
+            "selector_css": "#\\31 35select115",
+            "id": "135select115",
+            "comentario": "cambiar el .value y dispatch event change. Dentro del select vienen las options",
+            "valor_actual": "-1"
+        },
+        {
+            "nombre": "listaDeObjetoDeImpuesto",
+            "descripcion": "",
+            "tag": "select",
+            "id": "135select115",
+            "selector": "#\\31 35select115",
+            "opciones": [
+                {
+                    "nombre": "Seleccione...",
+                    "valor": "-1",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(1)"
+                },
+                {
+                    "nombre": "No objeto de impuesto.",
+                    "valor": "01",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(2)"
+                },
+                {
+                    "nombre": "Sí objeto de impuesto.",
+                    "valor": "02",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(3)"
+                },
+                {
+                    "nombre": "Sí objeto del impuesto y no obligado al desglose.",
+                    "valor": "03",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(4)"
+                },
+                {
+                    "nombre": "Sí objeto del impuesto y no causa impuesto.",
+                    "valor": "04",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(5)"
+                },
+                {
+                    "nombre": "Sí objeto del impuesto, IVA crédito PODEBI.",
+                    "valor": "05",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(6)"
+                },
+                {
+                    "nombre": "Sí objeto del IVA, No traslado IVA.",
+                    "valor": "06",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(7)"
+                },
+                {
+                    "nombre": "No traslado del IVA, Sí desglose IEPS.",
+                    "valor": "07",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(8)"
+                },
+                {
+                    "nombre": "No traslado del IVA, No desglose IEPS.",
+                    "valor": "08",
+                    "id": null,
+                    "selector": "#\\31 35select115 > option:nth-of-type(9)"
+                }
+            ]
+        },
+        {
+            "tag": "input",
+            "nombre": "numeroDeIdentificacion",
+            "descripcion": "Input donde se ingresa el SKU o equivalente para control interno",
+            "selector_css": "#\\31 35textbox120",
+            "id": "135textbox120",
+            "valor_actual": null
+        }
+    ],
+    "impuestos": [
+        {
+            "tag": "input",
+            "nombre": "aceptarSugerenciaDeImpuestos",
+            "descripcion": "Checkbox. Si esta habilitado se llena automaticamente los impuestos que supuestamente aplican al producto o servicio. Si se deshabilita el checbox se habilitan los inputs para seleccionar manualmente los impuestos y porcentajes manualmente.",
+            "selector_css": "#\\31 35checkbox145",
+            "id": "135checkbox145",
+            "valor_actual": false
+        },
+        {
+            "tag": "input",
+            "nombre": "tasaIvaCobrado",
+            "descripcion": "Checkbox que habilita el impuesto del IVA",
+            "selector_css": "#\\31 35checkbox154",
+            "id": "135checkbox154",
+            "valor_actual": true
+        },
+        {
+            "tag": "input",
+            "nombre": "baseIvaCobrado",
+            "descripcion": "Input autorellenado editable donde se muestra la base gravable para el calculo del IVA del producto o servicio",
+            "selector_css": "#\\31 35textbox157",
+            "id": "135textbox157",
+            "valor_actual": "21200.000000"
+        },
+        {
+            "tag": "input",
+            "nombre": "valorIvaCobrado",
+            "descripcion": "Input donde se muestra una lista para seleccionar el porcentaje aplicable del IVA al producto o servicio",
+            "selector_css": "#\\31 35textboxautocomplete158",
+            "id": "135textboxautocomplete158",
+            "valor_actual": "16%"
+        },
+        {
+            "tag": "input",
+            "nombre": "importeIvaCobrado",
+            "descripcion": "Input autorellenado aplicando el porcentaje del IVA a la base gravable",
+            "selector_css": "#\\31 35textbox159",
+            "id": "135textbox159",
+            "valor_actual": "3392.000000"
+        },
+        {
+            "tag": "input",
+            "nombre": "tasaRetencionDeIva",
+            "descripcion": "Checkbox que habilita el impuesto de Retencion del IVA",
+            "selector_css": "#\\31 35checkbox166",
+            "id": "135checkbox166",
+            "valor_actual": true
+        },
+        {
+            "tag": "input",
+            "nombre": "baseRetencionDeIva",
+            "descripcion": "Input autorellenado editable donde se muestra la base gravable para el calculo de la retencion del IVA del producto o servicio",
+            "selector_css": "#\\31 35textbox168",
+            "id": "135textbox168",
+            "valor_actual": "21200.000000"
+        },
+        {
+            "tag": "input",
+            "nombre": "valorRetencionDeIva",
+            "descripcion": "Input donde se muestra una lista para seleccionar el porcentaje aplicable de retención del IVA al producto o servicio.",
+            "selector_css": "#\\31 35textboxautocomplete169",
+            "id": "135textboxautocomplete169",
+            "valor_actual": "16%"
+        },
+        {
+            "nombre": "listaDeValorRetencionDeIva",
+            "descripcion": "",
+            "tag": "ul",
+            "id": "ui-id-13",
+            "selector": "#ui-id-13",
+            "items": [
+                {
+                    "nombre": "16%",
+                    "valor": "16%",
+                    "id": null,
+                    "selector": "#ui-id-13 > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "10.6667%",
+                    "valor": "10.6667%",
+                    "id": null,
+                    "selector": "#ui-id-13 > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "8%",
+                    "valor": "8%",
+                    "id": null,
+                    "selector": "#ui-id-13 > li:nth-of-type(3)"
+                },
+                {
+                    "nombre": "4%",
+                    "valor": "4%",
+                    "id": null,
+                    "selector": "#ui-id-13 > li:nth-of-type(4)"
+                }
+            ]
+        },
+        {
+            "tag": "input",
+            "nombre": "importeRetretencionDeIva",
+            "descripcion": "Input autorellenado aplicando el porcentaje de retención del IVA a la base gravable",
+            "selector_css": "#\\31 35textbox170",
+            "id": "135textbox170",
+            "valor_actual": "3392.000000"
+        },
+        {
+            "tag": "input",
+            "nombre": "tasaRetencionDeIsr",
+            "descripcion": "Checkbox que habilita el impuesto de retencion de ISR",
+            "selector_css": "#\\31 35checkbox176",
+            "id": "135checkbox176",
+            "valor_actual": true
+        },
+        {
+            "tag": "input",
+            "nombre": "baseRetencionDeIsr",
+            "descripcion": "Input autorellenado editable donde se muestra la base gravable para el calculo del ISR del producto o servicio",
+            "selector_css": "#\\31 35textbox178",
+            "id": "135textbox178",
+            "valor_actual": "21200.000000"
+        },
+        {
+            "tag": "input",
+            "nombre": "valorRetencionDeIsr",
+            "descripcion": "Input que muestra una lista para seleccionar el porcentaje aplicable de retencion del ISR al producto o servicio.",
+            "selector_css": "#\\31 35textboxautocomplete179",
+            "id": "135textboxautocomplete179",
+            "valor_actual": "35%"
+        },
+        {
+            "nombre": "listaDeValoresRetencionDeIsr",
+            "descripcion": "",
+            "tag": "ul",
+            "id": "ui-id-14",
+            "selector": "#ui-id-14",
+            "items": [
+                {
+                    "nombre": "35%",
+                    "valor": "35%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(1)"
+                },
+                {
+                    "nombre": "10%",
+                    "valor": "10%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(2)"
+                },
+                {
+                    "nombre": "8%",
+                    "valor": "8%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(3)"
+                },
+                {
+                    "nombre": "5%",
+                    "valor": "5%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(4)"
+                },
+                {
+                    "nombre": "4%",
+                    "valor": "4%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(5)"
+                },
+                {
+                    "nombre": "2.1%",
+                    "valor": "2.1%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(6)"
+                },
+                {
+                    "nombre": "1.25%",
+                    "valor": "1.25%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(7)"
+                },
+                {
+                    "nombre": "1%",
+                    "valor": "1%",
+                    "id": null,
+                    "selector": "#ui-id-14 > li:nth-of-type(8)"
+                }
+            ]
+        },
+        {
+            "tag": "input",
+            "nombre": "importeRetencionDeIsr",
+            "descripcion": "Input autorellenado aplicando el porcentaje de retención del ISR a la base gravable",
+            "selector_css": "#\\31 35textbox180",
+            "id": "135textbox180",
+            "valor_actual": "7420.000000"
+        },
+        {
+            "tag": "button",
+            "nombre": "guardar",
+            "descripcion": "Boton que guarda y agrega a la lista de productos y servicios el producto o servicio que se esta editando o agregando",
+            "selector_css": "#guardarEditar1350001",
+            "id": "guardarEditar1350001",
+            "valor_actual": "Guardar"
+        }
+    ],
+    "totales": [
+        {
+            "tag": "input",
+            "nombre": "subtotal",
+            "descripcion": "Input no editable. Muestra el importe total de los productos agregados sin impuestos ni descuentos",
+            "selector_css": "#\\31 35textbox266",
+            "id": "135textbox266",
+            "valor_actual": "21200.00"
+        },
+        {
+            "tag": "input",
+            "nombre": "descuento",
+            "descripcion": "Input no editable. Muestra el valor de los descuentos aplicados al total de los productos o servicios",
+            "selector_css": "#\\31 35textbox267",
+            "id": "135textbox267",
+            "valor_actual": null
+        },
+        {
+            "tag": "input",
+            "nombre": "impuestosTrasladados",
+            "descripcion": "Input no editable. Muestra la suma de los impuestos trasladados aplicados a todos los productos y servicios",
+            "selector_css": "#\\31 35textbox268",
+            "id": "135textbox268",
+            "valor_actual": "3392.00"
+        },
+        {
+            "tag": "input",
+            "nombre": "impuestosRetenidos",
+            "descripcion": "Input no editable. Muestra la suma de los impuestos retenidos aplicados a todos los productos y servicios",
+            "selector_css": "#\\31 35textbox269",
+            "id": "135textbox269",
+            "valor_actual": "2526.34"
+        },
+        {
+            "tag": "input",
+            "nombre": "total",
+            "descripcion": "Input no editable. Muestra el importe final de la factura tomando el subtotal, sumando los impuestos trasladados y restando los impuestos retenidos y los descuentos",
+            "selector_css": "#\\31 35textbox270",
+            "id": "135textbox270",
+            "valor_actual": "22065.66"
+        }
+    ],
+    "Cinta de opciones": [
+        {
+            "tag": "a",
+            "nombre": "guardar",
+            "descripcion": "Boton que guarda el progreso de llenado de la factura.",
+            "selector_css": "a.btn-guardar-das.btn.btn-primary.icon",
+            "id": null,
+            "valor_actual": null
+        },
+        {
+            "tag": "a",
+            "nombre": "vistaPrevia",
+            "descripcion": "Boton que genera un pdf que muestra la vista previa de la factura.",
+            "selector_css": "a.btn-marcar-vista-previa.btn.btn-primary.icon",
+            "id": null,
+            "valor_actual": null
+        },
+        {
+            "tag": "a",
+            "nombre": "sellar",
+            "descripcion": "Boton que lleva a la pagina para sellar y generar la factura",
+            "selector_css": "html:nth-of-type(1) > body:nth-of-type(1) > div:nth-of-type(4) > div:nth-of-type(2) > a:nth-of-type(3)",
+            "id": null,
+            "valor_actual": null
+        },
+        {
+            "tag": "a",
+            "nombre": "miFactura",
+            "descripcion": "Boton que permite tomar el llenado actual de la factura para guardarlo como plantilla y usarlo en futuras facturas.",
+            "selector_css": "a.btn-marcar-factura-rapida.btn.btn-primary.icon",
+            "id": null,
+            "valor_actual": null
+        }
+    ]
+}

@@ -6,6 +6,7 @@ const hideQueries: Record<string, string> = {
   privacidad: 'body > div:nth-child(10) > div:nth-child(6)',
   primerNavBar: 'body > nav',
   primerHeader: 'body > header',
+  headerNav: 'body > header > nav',
   version: 'body > div:nth-child(5) > div > div.col-sm-6 > span',
   comprobanteTitle: '#Comprobante > div:nth-child(1) > h5',
   divisor: 'body > div:nth-child(5) > div > div.col-sm-2',

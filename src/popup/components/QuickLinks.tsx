@@ -72,10 +72,11 @@ export const QuickLinks: React.FC = () => {
               <button
                 key={idx}
                 onClick={() => window.open(link.url, '_blank')}
-                className="group flex items-center justify-between p-2 rounded-lg bg-slate-800/80 hover:bg-blue-600/20 border border-slate-700/60 hover:border-blue-500/40 text-slate-200 hover:text-white transition-all text-xs font-medium text-left shadow-sm"
+                title={link.nombre}
+                className="group flex items-center gap-2 p-2 rounded-lg bg-slate-800/80 hover:bg-blue-600/20 border border-slate-700/60 hover:border-blue-500/40 text-slate-200 hover:text-white transition-all text-xs font-medium text-left shadow-sm"
               >
-                <span className="truncate mr-1">{link.nombre}</span>
                 <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-blue-400 shrink-0 transition-colors" />
+                <span className="truncate">{link.nombre}</span>
               </button>
             ))}
           </div>
